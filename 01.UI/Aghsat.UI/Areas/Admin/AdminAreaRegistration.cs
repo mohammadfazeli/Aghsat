@@ -8,7 +8,7 @@ namespace Aghsat.UI.Areas.Admin
         {
             get 
             {
-                return "Admin";
+                return "Farhad"; 
             }
         }
 
