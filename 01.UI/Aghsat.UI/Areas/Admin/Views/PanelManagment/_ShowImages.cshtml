@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Aghsat.ViewModel.Slider.Slider_List_vm>
+
+
+@*<div class="row">
+    @{
+        foreach (var item in Model)
+        {
+            <div class="col-md-4  p-2  border border-bottom-dark  uk-box-shadow-bottom  rounded-0" uk-lightbox="animation: fade">
+
+                <img class=" img-thumbnail" src="~/Content/Image/@item.ImageName" alt="@item.Title">
+                <input type="submit" class="btn btn-outline-dark rounded-0" value="ویرایش" />
+
+            </div>
+        }
+    }
+</div>
+<hr />*@
+<div class="row">
+    @{
+        foreach (var item in Model)
+        {
+            <div class="col-md-4    rounded-0 text-right text-white" uk-lightbox="animation: fade">
+
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-media-top">
+                        <img class=" img-thumbnail" src="~/Content/Image/@item.ImageName" alt="@item.Title">
+                    </div>
+                    <div class="uk-card-body  bg-dark">
+                        <h3 class="uk-card-title">@item.Title</h3>
+                        <p>@item.ShortDescription</p>
+                    </div>
+                </div>
+                <br/>
+
+            </div>
+        }
+    }
+</div>

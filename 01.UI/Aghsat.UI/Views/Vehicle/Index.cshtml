@@ -1,0 +1,13 @@
+﻿@model  IEnumerable<Aghsat.ViewModel.Vehicle_vm.Vehicle_List_vm>
+@{
+    //ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+@{
+    foreach (var item in Model)
+    {
+        <p>@item.Name ,@item.Vin</p>
+    }
+}

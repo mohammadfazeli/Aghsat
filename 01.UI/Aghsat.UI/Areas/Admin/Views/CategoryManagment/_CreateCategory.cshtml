@@ -1,0 +1,88 @@
+﻿@model Aghsat.ViewModel.Category.Category_Add_vm
+
+
+
+@Scripts.Render("~/bundles/jqueryval")
+
+@Html.Partial("_SubjectForm")
+
+<br />
+@using (Ajax.BeginForm(MVC.Admin.CategoryManagment.Create(), new AjaxOptions
+{
+    HttpMethod = "Post",
+    UpdateTargetId = "List",
+    InsertionMode = InsertionMode.Replace,
+    OnSuccess = "Hide"
+}))
+{
+    @Html.AntiForgeryToken()
+    <div class="uk-panel">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(x => x.Id)
+
+        <div class="form-group">
+            <div class="input-group  input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        @Html.DisplayNameFor(x => x.Name)
+                    </span>
+                </div>
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control uk-input" })
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            @Html.DropDownListFor(x => x.ParentCategoryId, new SelectList(Model.SubCategories, "Id", "Name"), "انتخاب کنید", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsDeleted)
+                    @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsActive)
+                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <input type="text" id="demoDatePersion" class="DatePersion" placeholder="select date" />
+
+        <input type="text" id="demo3" class="DatePersion" placeholder="select date" />
+
+        <input type="text" id="demo2" class="DatePersion" placeholder="select date" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+@Scripts.Render("~/bundles/CustomScripts")
+
+@*<script>
+
+
+        $(function() {
+
+            $("#demo2").persianDatepicker();
+            $("#demo3").persianDatepicker();
+
+        });
+    </script>*@

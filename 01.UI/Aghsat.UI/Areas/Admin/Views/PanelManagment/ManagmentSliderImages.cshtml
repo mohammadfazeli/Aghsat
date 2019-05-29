@@ -1,0 +1,63 @@
+﻿
+@{
+    // ViewBag.Title = "SaveImageSlide";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@Html.Partial("_SubjectForm")
+
+<a class="uk-button uk-button-default" onclick="Create()" href="#modal-sections" uk-toggle>عکس متحرک جدید</a>
+
+
+<div id="list">
+    @Html.Action("ShowImages")
+</div>
+
+
+
+@*<div id="modal-sections" uk-modal>
+        <div class="uk-modal-dialog uk-margin-auto-vertical">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">Modal Title</h2>
+            </div>
+            <div class="uk-modal-body" id="Modal_Body">
+
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                <button class="uk-button uk-button-primary" type="button">Save</button>
+            </div>
+        </div>
+    </div>*@
+
+
+@section scripts
+{
+
+    <script>
+
+        //(function () {
+        //    UIkit.modal('#Modal_Body').hide();
+        //})();
+
+        function Create() {
+            $.ajax({
+                url: '@Url.Action(MVC.Admin.PanelManagment.SaveImageSlide())',
+                type: "Get"
+            }).done(function(result) {
+
+                $('#Modal_Body').html(result);
+                UIkit.modal('#myModal').show();
+            });
+        }
+
+        function success() {
+            UIkit.modal('#modal-sections').hide();
+        }
+
+
+        function Failure() {
+            UIkit.modal('#modal-sections').hide();
+        }
+    </script>
+}

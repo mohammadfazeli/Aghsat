@@ -1,0 +1,13 @@
+﻿
+@{
+    /**/
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div id="List">
+    @Html.Partial("_SubjectForm")
+
+    @Html.Action("ShowList")
+</div>

@@ -1,0 +1,32 @@
+﻿@model Aghsat.ViewModel.Slider.Slider_Add_vm
+
+
+@Html.Partial("_SubjectForm")
+
+<br />
+
+@using (Ajax.BeginForm(MVC.Admin.PanelManagment.SaveImageSlide(), new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "list", OnSuccess = "success" }, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+
+        @Html.DisplayNameFor(x => x.Title)
+    </div>
+
+
+    <div class="form-group">
+        @Html.TextBoxFor(x => x.ShortDescription, new { @class = "form-control" })
+        @Html.DisplayNameFor(x => x.ShortDescription)
+
+    </div>
+
+    <div class="form-group">
+        <input type="file" name="file" id="file" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="#" class="btn btn-danger"></a>
+
+
+}

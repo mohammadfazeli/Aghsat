@@ -1,0 +1,75 @@
+﻿@*@model IEnumerable<Aghsat.Domain.Entity.Menu>*@
+@model IEnumerable<Aghsat.UI.Areas.Admin.Models.ControllerActions>
+
+<br />
+<br />
+<br />
+
+<div class="m-1">
+    <span class=" fa fa-calendar-o   text-dark"> @PersianCalender.PersianCalender.GetDateByDay() </span>
+    <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+    @*<ul uk-accordion class="text-center container">
+            @{
+                foreach (var item in Model.Where(x => x.ParentMenuId == null))
+                {
+                    <li class="display-4 list-group-item-secondary ">
+                        <a class="uk-accordion-title  fa fa-user  bg-secondary p-2 m-0" href="#"><span class=" fa fa-@item.IconMenu  float-left"></span>@item.MenuName</a>
+                        <div class="uk-accordion-content">
+                            @{
+                                if (item.SubCategories != null)
+                                {
+                                    foreach (var Childitem in item?.SubCategories)
+                                    {
+                                        <a class="uk-accordion-title  bg-info p-1 mb-1" href="#"> <span class=" fa fa-@Childitem.IconMenu  float-left"></span> @Childitem.MenuName</a>
+
+                                    }
+                                }
+                            }
+                        </div>
+                    </li>
+
+                                }
+
+            }
+
+        </ul>*@
+
+
+    <ul uk-accordion class="text-center  bg-dark">
+        @{
+            foreach (var item in Model.Select(x => new { name = x.ControllerName, Icon = x.ControllerIcon }).Distinct())
+            {
+                <li class="display-4  list-group-item-dark bg-dark ">
+                    <a class="uk-accordion-title  bg-dark p-2 m-0" href="#"><span class="@item.Icon  float-right"></span>@item.name </a>
+                    <div class="uk-accordion-content">
+                        @{
+
+                            foreach (var Childitem in Model)
+                            {
+                                if (Childitem.ControllerName == item.name)
+                                {
+
+                                    <div class="">
+                                        <a class="uk-accordion-title   bg-info p-1 mb-1" href="@Url.Action(Childitem.Action,Childitem.Controller)">
+                                           <span class=" @Childitem.ActionIcon  float-right "> </span>
+                                            @Childitem.ActionName
+                                        </a>
+                                    </div>
+                                }
+                            }
+
+                        }
+
+                    </div>
+                </li>
+
+            }
+
+        }
+
+    </ul>
+
+
+</div>
+

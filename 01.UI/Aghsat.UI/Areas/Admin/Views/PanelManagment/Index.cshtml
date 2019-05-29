@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Aghsat.UI.Areas.Admin.Models.ControllerActions>
+
+@{
+    //ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    @*<link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />*@
+
+}
+@Html.Partial("_SubjectForm")
+
+<div class="table-responsive ">
+
+    <table id="test" style="width: 100% " class="  table  data-Table table-hover table-dark table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Controller)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ControllerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Action)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ActionIcon)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Attributes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReturnType)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Controller)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ControllerName)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink(item.Action, item.Action, item.Controller)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Action)
+                    </td>
+                    <td>
+                        <span class="@item.ActionIcon float-left"> @Html.DisplayFor(modelItem => item.ActionIcon) </span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Attributes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReturnType)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<br />
+
+@section scripts
+{
+    @*<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>*@
+
+    @*<script type="text/javascript">
+        $(document).ready(function () {
+            $('#test').dataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Persian.json"
+                }
+            });
+        });
+
+
+
+    </script>*@
+
+
+}

@@ -1,0 +1,23 @@
+﻿@model  IEnumerable<Aghsat.ViewModel.Slider.Slider_List_vm>
+<div class="p-0  mx-auto d-block">
+    <div uk-slideshow="animation: push;autoplay: true">
+
+        <div class="uk-position-relative uk-visible-toggle uk-light  " tabindex="-1">
+
+            <ul class="uk-slideshow-items">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <img class="img-fluid" src="../../Content/Image/@item.ImageName" alt="" uk-cover>
+                    </li>
+                }
+            </ul>
+            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+
+        </div>
+
+        <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
+
+    </div>
+</div>

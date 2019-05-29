@@ -1,0 +1,67 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.Menu {
+    margin-top: auto;
+}
+
+.uk-offcanvas-bar {
+    background-color: #dee2e6 !important;
+}
+
+.Menu_ItemName {
+    border: 1px solid #ff0000;
+}
+
+.Line_bottom {
+    border-bottom: 1px solid #ff0000;
+}
+
+.bg-silver {
+    background-color: silver;
+}
+
+.uk-notification-message-success {
+    background-color: green !important;
+    color: white !important;
+}
+
+.uk-notification-message-primary {
+    background-color: #008b8b !important;
+    color: orange !important;
+}
+
+.uk-notification-message-warning {
+    background-color: orange !important;
+    color: black !important;
+}
+
+.uk-notification-message-danger {
+    background-color: black !important;
+    color: yellow !important;
+}
+.dataTables_filter {
+    text-align: center !important;
+}

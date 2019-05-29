@@ -1,0 +1,98 @@
+﻿
+@model IEnumerable<Aghsat.ViewModel.Category.Category_List_vm>
+
+
+@Html.Partial("_SubjectForm")
+
+<div>
+
+
+    <div class=" table-responsive  bg-light p-3">
+
+        @Ajax.ActionLink("جدید",MVC.Admin.CategoryManagment.Create(),new AjaxOptions
+        {
+            UpdateTargetId= "Modal_Body", // <-- DOM element ID to update
+            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+            HttpMethod = "GET" ,// <-- HTTP method
+            OnBegin = "ShowModal"
+        },new {@class= "btn btn-info " })
+
+        @{
+            if (Model.Any())
+            {
+                <table id="dtSubCategory" style="width: 100%" class="table  table-dark  table-hover  table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th> @Html.DisplayNameFor(x => x.Name) </th>
+                            <th> @Html.DisplayNameFor(x => x.CreateDate) </th>
+                            <th> @Html.DisplayNameFor(x => x.ModifeDate) </th>
+                            <th> @Html.DisplayNameFor(x => x.IsActive) </th>
+                            <th> @Html.DisplayNameFor(x => x.IsDeleted) </th>
+                            <th>tools </th>
+
+
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                @Html.HiddenFor(x => item.ParentCategoryId)
+                                <tr class=" ">
+                                    <td> @Html.DisplayFor(x => item.Name) </td>
+                                    <td> @Html.DisplayFor(x => item.CreateDate) </td>
+                                    <td> @Html.DisplayFor(x => item.ModifeDate) </td>
+                                    <td> @Html.DisplayFor(x => item.IsActive) </td>
+                                    <td> @Html.DisplayFor(x => item.IsDeleted) </td>
+                                    <td>
+                                        @*@Html.ActionLink("حذف", MVC.Admin.CategoryManagment.DeleteCategory(item.Id), new { @class = "btn btn-warning " })*@
+                                        @Ajax.ActionLink("حذف ", MVC.Admin.CategoryManagment.DeleteCategory(item.Id) , new AjaxOptions
+                                   {
+                                       UpdateTargetId = "SubList", // <-- DOM element ID to update
+                                       InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                                       HttpMethod = "GET" // <-- HTTP method
+                                                          //UpdateTargetId = "List", // <-- DOM element ID to update
+
+                                   }, new {@class = "btn btn-warning " })
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div uk-alert class="  bg-secondary text-white  text-right">
+                    <a class="uk-alert-close" uk-close></a>
+                    <span class="fa fa-exclamation-circle fa-2x"></span>
+                    <p>هیچ دسته بندی ثبت نشده است</p>
+                </div>
+
+
+            }
+        }
+
+    </div>
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#dtSubCategory').dataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Persian.json"
+            }
+        });
+    });
+
+</script>
+

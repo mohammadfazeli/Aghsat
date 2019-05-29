@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Aghsat.ViewModel.Category.Category_List_vm>
+
+
+<div class=" table-responsive  bg-light p-3 shadow">
+
+
+    <div class="float-right dt-buttons btn-group ">
+        @Ajax.ActionLink("جدید",MVC.Admin.CategoryManagment.Create(),new AjaxOptions
+   {
+       UpdateTargetId= "Modal_Body", // <-- DOM element ID to update
+       InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+       HttpMethod = "GET" ,// <-- HTTP method
+       OnComplete = "ShowModal"
+   },new {@class= "btn btn-info " })
+    </div>
+    @{
+        if (Model != null && Model.Any())
+        {
+            <table id="dtCategory" style="width: 100%" class="table data-Table  table-dark  table-hover  table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th> @Html.DisplayNameFor(x => x.Name) </th>
+                        <th> @Html.DisplayNameFor(x => x.CreateDate) </th>
+                        <th> @Html.DisplayNameFor(x => x.ModifeDate) </th>
+                        <th> @Html.DisplayNameFor(x => x.IsActive) </th>
+                        <th> @Html.DisplayNameFor(x => x.IsDeleted) </th>
+                        <th>
+                            ابزار
+                        </th>
+
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <tr class="">
+                                <td> @Html.DisplayFor(x => item.Name) </td>
+                                <td> @Html.DisplayFor(x => item.CreateDate) </td>
+                                <td> @Html.DisplayFor(x => item.ModifeDate) </td>
+                                <td> @Html.DisplayFor(x => item.IsActive) </td>
+                                <td> @Html.DisplayFor(x => item.IsDeleted) </td>
+                                <td>
+                                    <div class="btn-group">
+
+
+                                        @Ajax.ActionLink("زیر گروه", MVC.Admin.CategoryManagment.GetAllSubCategoriesByParentId(item.Id), new AjaxOptions
+                                        {
+                                            UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
+                                            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                                            HttpMethod = "GET", // <-- HTTP method
+                                            OnBegin = "ShowModal"
+                                        }, new {@class = "btn btn-info "})
+
+                                        @Ajax.ActionLink("حذف ", MVC.Admin.CategoryManagment.DeleteCategory(item.Id) , new AjaxOptions
+                                        {
+                                            UpdateTargetId = "List", // <-- DOM element ID to update
+                                            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                                            HttpMethod = "GET" // <-- HTTP method
+                                            //UpdateTargetId = "List", // <-- DOM element ID to update
+
+                                        }, new {@class = "btn btn-warning " })
+
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div uk-alert class="   bg-secondary text-white  text-right">
+                <a class="uk-alert-close" uk-close></a>
+                <span class="fa fa-exclamation-circle fa-2x"></span>
+                <p>هیچ دسته بندی ثبت نشده است</p>
+            </div>
+        }
+    }
+
+</div>
+
+@Scripts.Render("~/bundles/CustomScripts")
+
