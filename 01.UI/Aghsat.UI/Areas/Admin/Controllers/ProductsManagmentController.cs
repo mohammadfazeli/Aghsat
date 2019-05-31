@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using Aghsat.DataLayer.AghsatContext;
 using Aghsat.Domain.Entity;
 using Aghsat.ServiceLayer.Interface;
@@ -124,6 +125,7 @@ namespace Aghsat.UI.Areas.Admin.Controllers
             //try
             //{
             var Products = Mapper.Map<Product_Add_vm, Product>(ViewModel);
+            Products.CreateDate = Convert.ToDateTime(Products.CreateDate).ToShortDateString().AsDateTime();
             var result = _ProductsServices.Create(Products);
 
             switch (result)
@@ -132,11 +134,11 @@ namespace Aghsat.UI.Areas.Admin.Controllers
 
                     _uow.SaveAllChanges();
                     ToastrService.AddToUserQueue(new Toastr(message: "ثبت شد", type: ToastrType.Success));
-                    //return RedirectToAction(MVC.Admin.ProductsManagment.Index());
-                    //ViewBag.MessageType = ToastrType.Success;
-                    ViewBag.test = (Id: 1, FirstName: "Bill", LastName: "Gates");
-                    
-                    return PartialView("_ShowListProduct", _ProductsServices.GetListVms());
+                    //return PartialView("_ShowListProduct", _ProductsServices.GetListVms());
+                    //return PartialView("_CreateProduct", _ProductsServices.GetAddVm());
+                    //return PartialView("_CreateProduct", _ProductsServices.GetAddVm());
+                    return RedirectToAction(MVC.Admin.ProductsManagment.ShowList());
+
 
                 case AddStatus.Exist:
                     ToastrService.AddToUserQueue(new Toastr(message: "تکراری", type: ToastrType.Info));
@@ -201,14 +203,33 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         //}
 
         // POST: Admin/Products/Delete/5
-        [HttpPost]
+        [HttpGet]
         public virtual ActionResult Delete(int id)
         {
-            _ProductsServices.delete(id);
-            _uow.SaveAllChanges();
-            //return RedirectToAction(MVC.Admin.ProductsManagment.Index());
-            return PartialView("_ShowListProduct", _ProductsServices.GetListVms());
+            var result = _ProductsServices.delete(id);
+            switch (result)
+            {
+                case DeleteStatus.Succeeded:
 
+                    _uow.SaveAllChanges();
+                    ToastrService.AddToUserQueue(new Toastr(message: "ثبت شد", type: ToastrType.Success));
+                    return RedirectToAction(MVC.Admin.ProductsManagment.ShowList());
+
+                case DeleteStatus.NotExist:
+                    ToastrService.AddToUserQueue(new Toastr(message: "وجود ندارد", type: ToastrType.Info));
+                    break;
+
+                case DeleteStatus.Error:
+                    ToastrService.AddToUserQueue(new Toastr(message: "خطا", type: ToastrType.Error));
+                    break;
+
+                case DeleteStatus.Fail:
+                    ToastrService.AddToUserQueue(new Toastr(message: "خطا", type: ToastrType.Warning));
+                    break;
+
+
+            }
+            return PartialView("_ShowListProducts", _ProductsServices.GetAddVm());
         }
 
 

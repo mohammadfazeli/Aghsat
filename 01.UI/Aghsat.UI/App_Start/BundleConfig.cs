@@ -12,12 +12,15 @@ namespace Aghsat.UI
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery.unobtrusive-ajax.js",
                         "~/Scripts/uikit.js",
-                        "~/Scripts/uikit-icons.js"
-                        //"~/Scripts/Custom-datatables.min.js",
+                        "~/Scripts/uikit-icons.js",
+                        "~/Scripts/persianDatePicker.js",
+                        "~/Scripts/Fulldatatables.min.js"
+
+
+            //"~/Scripts/Custom-datatables.min.js",
 
             //"~/Scripts/pwt-date.js",
             //"~/Scripts/pwt-datepicker.js",
-            //"~/Scripts/persianDatePicker.js",
             //"~/Scripts/Custom-datatables.min.js"
             //"~/Scripts/jquery.md.bootstrap.datetimepicker.js"
 
@@ -47,18 +50,18 @@ namespace Aghsat.UI
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/Fulldatatables.min.css",
+                      "~/Content/uikit-rtl.css",
                       "~/Content/persianDatePicker-default.css",
                       "~/Content/site.css",
                       "~/Content/font-awesome.css",
                       "~/Assets/fontawesome-free-5.6.3/css/all.css",
                       "~/Assets/persian_fonts_override.css",
                       "~/Content/toastr.css",
-                      "~/Content/uikit-rtl.css",
                       "~/Content/MDB/css/mdb.css",
-                      "~/Content/MDB/css/style.css",
-                      "~/Content/Custom-datatables.min.css",
-                      "~/Content/jquery.md.bootstrap.datetimepicker.style.css",
-                      "~/Content/css/addons/datatables.css"
+                      "~/Content/MDB/css/style.css"
+                      //"~/Content/Custom-datatables.min.css",
+                      //"~/Content/css/addons/datatables.css"
                       ));
         }
     }

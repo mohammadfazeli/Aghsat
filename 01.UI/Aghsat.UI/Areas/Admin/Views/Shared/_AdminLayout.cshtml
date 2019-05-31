@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html class="bg-dark">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +11,7 @@
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @*<script>
-            $(".DatePersion").persianDatepicker({
-                formatDate: "YYYY/MM/DD"
-            });
-        </script>*@
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
@@ -25,10 +21,10 @@
     @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />*@
 
 </head>
-<body style="direction: rtl; " class="">
+<body style="direction: rtl;" class="bg-dark">
 
-    <nav class="p-1 navbar navbar-expand-sm bg-dark text-right fixed-top">
-        <button class="uk-button   uk-button-default bg-danger " type="button" uk-toggle="target: #offcanvas-push"><span uk-icon="menu"></span></button>
+    <nav class="p-1 navbar navbar-expand-sm bg-dark text-right  fixed-top" style="border-bottom: 1px  solid red;">
+        <button class="uk-button uk-button-default bg-danger " type="button" uk-toggle="target: #offcanvas-push"><span uk-icon="menu"></span></button>
 
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -37,28 +33,39 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             @Html.Partial("_LoginPartial")
         </div>
+
+
     </nav>
     <!-- offcanvas -->
-    <br />
-
     <div id="offcanvas-push" uk-offcanvas="mode: push; overlay: true" class="p-3 Menu">
         <div class="uk-offcanvas-bar uk-padding-remove  ">
             <!-- Nav -->
             @Html.Action(MVC.Admin.PanelManagment.Menu())
         </div>
     </div>
+
+
     <!-- Container -->
     <div class="container-fluid @*body-content*@">
         @RenderBody()
+        <input type="text" class="DatePersion" />
     </div>
-    @Html.Partial("_Modal")
+
+    @*@Html.Partial("_Modal")*@
 
     @Scripts.Render("~/bundles/jquery")
 
     @Scripts.Render("~/bundles/CustomScripts")
+    <script>
+    $(function() {
+
+        $(".DatePersion").persianDatepicker({
+        formatDate: "YYYY/MM/DD"
+         });
+    });
+    </script>
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
-    <script type="text/javascript" src="~/Scripts/Custom-datatables.min.js"></script>
 
     @ToastrHelper.ProcessToastrs()
 

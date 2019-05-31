@@ -279,6 +279,7 @@
     <Content Include="Content\Custom-datatables.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Fulldatatables.min.css" />
     <Content Include="Content\jquery.md.bootstrap.datetimepicker.style.css" />
     <Content Include="Content\MDB\css\addons\datatables-select.css" />
     <Content Include="Content\MDB\css\addons\datatables-select.min.css" />
@@ -360,6 +361,7 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\Fulldatatables.min.js" />
     <Content Include="Scripts\index.d.ts" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -513,6 +515,7 @@
     <Content Include="Areas\Admin\Views\ProductsManagment\_ShowListProduct.cshtml" />
     <Content Include="App_Code\Customhelper.cshtml" />
     <Content Include="Areas\Admin\Views\ProductsManagment\_CreateProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ModalAdminLayout.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jalaali.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -652,7 +655,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>34033</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:27778/</IISUrl>
+          <IISUrl>http://localhost:34033/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,17 +1,20 @@
-﻿$(document).ready(function () {
-   // $('#dtCategory').dataTable({
-   $('table.data-Table').dataTable({
-        retrieve: true,
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'print'
-        ],
+﻿
+   $(document).ready(function () {
+     // $('#dtCategory').dataTable({
+     $('table.data-Table').dataTable({
+         retrieve: true,
+         dom: 'Bfrtip',
+         buttons: [
+             'copy', 'csv', 'excel', 'print'
+         ],
 
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Persian.json"
-        }
-    });
-});
+         "language": {
+             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Persian.json"
+         }
+     });
+ });
+
+
 
 function ShowModal() {
     UIkit.modal("#modal-sections").show();
@@ -20,8 +23,7 @@ function Hide() {
     UIkit.modal("#modal-sections").hide();
 }
 
-
-
+$(".DatePersion").persianDatepicker();
 
 //$('#date2').MdPersianDateTimePicker({
 //    targetTextSelector: '#inputDate2',

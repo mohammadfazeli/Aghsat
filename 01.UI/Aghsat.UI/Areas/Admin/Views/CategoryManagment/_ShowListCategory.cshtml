@@ -86,3 +86,21 @@
 
 @Scripts.Render("~/bundles/CustomScripts")
 
+<script>
+
+        $(document).ready(function () {
+            $('table.data-Table').dataTable({
+                retrieve: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'print'
+                ],
+
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Persian.json"
+                }
+            });
+
+
+        });
+</script>

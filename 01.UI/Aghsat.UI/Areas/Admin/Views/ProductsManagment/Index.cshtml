@@ -1,13 +1,19 @@
 ﻿
+
 @{
     /**/
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
+<div class="m-3">
 
-
-<div id="List">
     @Html.Partial("_SubjectForm")
+    <div id="List">
+        @ToastrHelper.ProcessToastrs()
+        @Html.Action("ShowList")
+    </div>
 
-    @Html.Action("ShowList")
 </div>
+
+
+@Html.Partial("_Modal")

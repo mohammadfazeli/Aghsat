@@ -150,4 +150,10 @@
   <data name="UnitId" xml:space="preserve">
     <value>واحد قطعه</value>
   </data>
+  <data name="CategoryName" xml:space="preserve">
+    <value>نام دسته بندی</value>
+  </data>
+  <data name="UnitName" xml:space="preserve">
+    <value>نام واحد</value>
+  </data>
 </root>
