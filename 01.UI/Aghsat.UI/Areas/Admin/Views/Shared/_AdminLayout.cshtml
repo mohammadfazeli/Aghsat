@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html class="bg-dark">
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,7 @@
     @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />*@
 
 </head>
-<body style="direction: rtl;" class="bg-dark">
+<body style="direction: rtl;   background-color: #CDDBD7;  ">
 
     <nav class="p-1 navbar navbar-expand-sm bg-dark text-right  fixed-top" style="border-bottom: 1px  solid red;">
         <button class="uk-button uk-button-default bg-danger " type="button" uk-toggle="target: #offcanvas-push"><span uk-icon="menu"></span></button>
@@ -47,11 +47,14 @@
 
     <!-- Container -->
     <div class="container-fluid @*body-content*@">
+        <br />
+
+        @{Html.RenderPartial("_BreadCrumb");}
+        <hr />
         @RenderBody()
-        <input type="text" class="DatePersion" />
     </div>
 
-    @*@Html.Partial("_Modal")*@
+    @*@Html.Partial("_ModalMain")*@
 
     @Scripts.Render("~/bundles/jquery")
 

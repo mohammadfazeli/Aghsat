@@ -1,48 +1,67 @@
 ﻿@*@model IEnumerable<Aghsat.Domain.Entity.Menu>*@
 @model IEnumerable<Aghsat.UI.Areas.Admin.Models.ControllerActions>
 
-<br />
-<br />
-<br />
 
-<div class="m-1">
-    <span class=" fa fa-calendar-o   text-dark"> @PersianCalender.PersianCalender.GetDateByDay() </span>
-    <button class="uk-offcanvas-close" type="button" uk-close></button>
+<!-- Old Menu-->
+@*<div class="m-1">
+        <span class=" fa fa-calendar-o   text-dark"> @PersianCalender.PersianCalender.GetDateByDay() </span>
+        <button class="uk-offcanvas-close" type="button" uk-close></button>
 
-    @*<ul uk-accordion class="text-center container">
+        <ul uk-accordion class="text-center bg-dark">
             @{
-                foreach (var item in Model.Where(x => x.ParentMenuId == null))
+                foreach (var item in Model.Select(x => new { name = x.ControllerName, Icon = x.ControllerIcon }).Distinct())
                 {
-                    <li class="display-4 list-group-item-secondary ">
-                        <a class="uk-accordion-title  fa fa-user  bg-secondary p-2 m-0" href="#"><span class=" fa fa-@item.IconMenu  float-left"></span>@item.MenuName</a>
+                    <li class="display-4  list-group-item-dark bg-dark ">
+                        <a class="uk-accordion-title  bg-dark p-2 m-0" href="#"><span class="@item.Icon  float-right"></span>@item.name </a>
                         <div class="uk-accordion-content">
                             @{
-                                if (item.SubCategories != null)
-                                {
-                                    foreach (var Childitem in item?.SubCategories)
-                                    {
-                                        <a class="uk-accordion-title  bg-info p-1 mb-1" href="#"> <span class=" fa fa-@Childitem.IconMenu  float-left"></span> @Childitem.MenuName</a>
 
+                                foreach (var Childitem in Model)
+                                {
+                                    if (Childitem.ControllerName == item.name)
+                                    {
+
+                                        <div class="">
+                                            <a class="uk-accordion-title   bg-info p-1 mb-1" href="@Url.Action(Childitem.Action,Childitem.Controller)">
+                                                <span class=" @Childitem.ActionIcon  float-right "> </span>
+                                                @Childitem.ActionName
+                                            </a>
+                                        </div>
                                     }
                                 }
+
                             }
+
                         </div>
                     </li>
 
-                                }
+                }
 
             }
 
-        </ul>*@
+        </ul>
 
 
-    <ul uk-accordion class="text-center  bg-dark">
+    </div>*@
+<!-- Old Menu-->
+<br />
+<br />
+<br />
+<div class="uk-card   uk-card-default uk-card-body" style="background-color: #dee2e6 !important;">
+    <ul class="uk-nav-default uk-nav-parent-icon  bg-dark " uk-nav>
         @{
             foreach (var item in Model.Select(x => new { name = x.ControllerName, Icon = x.ControllerIcon }).Distinct())
             {
-                <li class="display-4  list-group-item-dark bg-dark ">
-                    <a class="uk-accordion-title  bg-dark p-2 m-0" href="#"><span class="@item.Icon  float-right"></span>@item.name </a>
-                    <div class="uk-accordion-content">
+
+                @*<li class="uk-active"><a href="#">Active</a></li>*@
+                <li class="uk-parent ">
+                    @*<a href="#">Parent</a>*@
+                    <a class="bg-dark p-2 m-0  list-inline text-center" style="display: block;" href="#"><span class="@item.Icon  float-right"></span>@item.name </a>
+
+                    @*<ul class="uk-nav-sub" >*@
+                    @*<li><a href="#">Sub item</a></li>*@
+
+                    <ul @*class="uk-nav-sub list-group-item-primary"*@ style="background-color: orange; ">
                         @{
 
                             foreach (var Childitem in Model)
@@ -50,26 +69,32 @@
                                 if (Childitem.ControllerName == item.name)
                                 {
 
-                                    <div class="">
-                                        <a class="uk-accordion-title   bg-info p-1 mb-1" href="@Url.Action(Childitem.Action,Childitem.Controller)">
-                                           <span class=" @Childitem.ActionIcon  float-right "> </span>
+                                    <li class=" uk-text-center">
+                                        <a class="bg-info p-1 mb-1 " href="@Url.Action(Childitem.Action, Childitem.Controller)">
+                                            <span class=" @Childitem.ActionIcon  float-right " style="margin-right: 10%;"> </span>
                                             @Childitem.ActionName
                                         </a>
-                                    </div>
+
+
+                                        @*@Ajax.ActionLink(@Childitem.ActionName.ToString(), Childitem.Action, Childitem.Controller,new { lodaFromMain =true}, new AjaxOptions
+                                            {
+                                                UpdateTargetId= "Main_Modal_Body", // <-- DOM element ID to update
+                                                InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                                                HttpMethod = "GET" ,// <-- HTTP method
+                                                OnComplete = "ShowModal"
+
+                                            }, new {@class = "bg-info p-1 mb-1 " })*@
+
+
+                                    </li>
                                 }
                             }
 
                         }
-
-                    </div>
+                        @*</ul>*@
+                    </ul>
                 </li>
-
             }
-
         }
-
     </ul>
-
-
 </div>
-

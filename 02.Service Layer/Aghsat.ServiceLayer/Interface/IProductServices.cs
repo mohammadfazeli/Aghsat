@@ -16,5 +16,7 @@ namespace Aghsat.ServiceLayer.Interface
         Product_Add_vm GetAddVm(Product_Add_vm ViewModel);
         Product_Add_vm GetAddVm(Product model);
         IEnumerable<Product_List_vm> GetListVms();
+        Product_Detail_vm GetDetailByID(int id);
+
     }
 }

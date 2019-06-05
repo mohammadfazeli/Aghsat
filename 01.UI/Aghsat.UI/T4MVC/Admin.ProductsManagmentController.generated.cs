@@ -76,6 +76,12 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult ConfirmDelete()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ConfirmDelete);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult Delete()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
@@ -102,6 +108,7 @@ namespace Aghsat.UI.Areas.Admin.Controllers
             public readonly string Create = "Create";
             public readonly string Edit = "Edit";
             public readonly string Save = "Save";
+            public readonly string ConfirmDelete = "ConfirmDelete";
             public readonly string Delete = "Delete";
         }
 
@@ -114,10 +121,19 @@ namespace Aghsat.UI.Areas.Admin.Controllers
             public const string Create = "Create";
             public const string Edit = "Edit";
             public const string Save = "Save";
+            public const string ConfirmDelete = "ConfirmDelete";
             public const string Delete = "Delete";
         }
 
 
+        static readonly ActionParamsClass_Index s_params_Index = new ActionParamsClass_Index();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Index
+        {
+            public readonly string lodaFromMain = "lodaFromMain";
+        }
         static readonly ActionParamsClass_Details s_params_Details = new ActionParamsClass_Details();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Details DetailsParams { get { return s_params_Details; } }
@@ -125,6 +141,14 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         public class ActionParamsClass_Details
         {
             public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Create
+        {
+            public readonly string lodaFromMain = "lodaFromMain";
         }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -141,6 +165,15 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         public class ActionParamsClass_Save
         {
             public readonly string ViewModel = "ViewModel";
+            public readonly string file = "file";
+        }
+        static readonly ActionParamsClass_ConfirmDelete s_params_ConfirmDelete = new ActionParamsClass_ConfirmDelete();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ConfirmDelete ConfirmDeleteParams { get { return s_params_ConfirmDelete; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ConfirmDelete
+        {
+            public readonly string id = "id";
         }
         static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -184,13 +217,14 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         public T4MVC_ProductsManagmentController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, bool lodaFromMain);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index()
+        public override System.Web.Mvc.ActionResult Index(bool lodaFromMain)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "lodaFromMain", lodaFromMain);
+            IndexOverride(callInfo, lodaFromMain);
             return callInfo;
         }
 
@@ -218,13 +252,14 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         }
 
         [NonAction]
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, bool lodaFromMain);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Create()
+        public override System.Web.Mvc.ActionResult Create(bool lodaFromMain)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
-            CreateOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "lodaFromMain", lodaFromMain);
+            CreateOverride(callInfo, lodaFromMain);
             return callInfo;
         }
 
@@ -241,14 +276,27 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         }
 
         [NonAction]
-        partial void SaveOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Aghsat.ViewModel.Product.Product_Add_vm ViewModel);
+        partial void SaveOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Aghsat.ViewModel.Product.Product_Add_vm ViewModel, System.Web.HttpPostedFileBase file);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Save(Aghsat.ViewModel.Product.Product_Add_vm ViewModel)
+        public override System.Web.Mvc.ActionResult Save(Aghsat.ViewModel.Product.Product_Add_vm ViewModel, System.Web.HttpPostedFileBase file)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Save);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "ViewModel", ViewModel);
-            SaveOverride(callInfo, ViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "file", file);
+            SaveOverride(callInfo, ViewModel, file);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ConfirmDeleteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult ConfirmDelete(int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ConfirmDelete);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ConfirmDeleteOverride(callInfo, id);
             return callInfo;
         }
 

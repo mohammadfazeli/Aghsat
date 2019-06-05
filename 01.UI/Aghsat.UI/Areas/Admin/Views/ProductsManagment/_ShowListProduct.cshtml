@@ -1,131 +1,161 @@
 ﻿
 
+@using Microsoft.Ajax.Utilities
 @model IEnumerable<Aghsat.ViewModel.Product.Product_List_vm>
+<div class="border border-dark  uk-box-shadow-hover-large">
 
-<div class=" table-responsive  bg-light p-3">
+    <div class=" table-responsive  bg-light p-3 ">
 
-    <div class="float-right dt-buttons btn-group ">
-        @Ajax.ActionLink("جدید",MVC.Admin.ProductsManagment.Create(),new AjaxOptions
-        {
-            UpdateTargetId= "Modal_Body", // <-- DOM element ID to update
-            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-            HttpMethod = "GET" ,// <-- HTTP method
-            OnComplete = "ShowModal"
-        },new {@class= "btn btn-info " })
-    </div>
-    @{
-        if (Model != null && Model.Any())
-        {
-            <table id="dtCategory" style="width: 100%" class="table  data-Table table-dark  table-hover  table-bordered text-center">
-                <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(row => row.CategoryName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.UnitName)
-                    </th>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.ProductDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.MainImage)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CreateDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ModifeDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IsDeleted)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IsActive)
-                    </th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+        <div class="float-right  form-inline">
+            @Ajax.ActionLink("جدید", MVC.Admin.ProductsManagment.Create(), new AjaxOptions
+            {
+                UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
+                InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                HttpMethod = "GET", // <-- HTTP method
+                OnComplete = "ShowModal"
+            }, new {@class = "uk-button uk-button-secondary uk-button-small"})
+        </div>
+        @{
+            if (Model != null && Model.Any())
+            {
+                <table id="dtCategory" style="width: 100%" class="table  data-Table table-dark  table-hover  table-bordered text-center">
+                    <thead>
                         <tr>
-                            
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CategoryName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UnitName)
-                            </td>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(row => row.CategoryName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UnitName)
+                            </th>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ProductDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MainImage)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CreateDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ModifeDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IsDeleted)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IsActive)
-                            </td>
-                            <td class="btn-group   ">
-                                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
-                                @Html.ActionLink("Details", "Details", new {id = item.Id}) |
-                                @Ajax.ActionLink(" ", MVC.Admin.ProductsManagment.Edit(item.Id), new AjaxOptions
-                                {
-                                    UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
-                                    InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-                                    HttpMethod = "GET", // <-- HTTP method
-                                    OnComplete = "ShowModal"
-                                }, new {@class = "btn btn-sm  fa fa-edit bg-light  "})
-
-                                @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
-                                @Ajax.ActionLink(" ", MVC.Admin.ProductsManagment.Delete(item.Id), new AjaxOptions
-                                {
-                                    UpdateTargetId = "List", // <-- DOM element ID to update
-                                    InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-                                    HttpMethod = "GET" // <-- HTTP method
-                                    //UpdateTargetId = "List", // <-- DOM element ID to update
-
-                                }, new {@class = "btn  btn-warning btn-sm fa fa-remove "})
-                            </td>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProductDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MainImage)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CreateDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ModifeDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsDeleted)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsActive)
+                            </th>
+                            <th></th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <br />
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
 
-            <div uk-alert class="   bg-secondary text-white  text-right">
-                <a class="uk-alert-close" uk-close></a>
-                <p class="mb-2">
-                    <span class="fa fa-exclamation-circle fa-2x"></span>
-                    هیچ محصولی ثبت نشده است
-                </p>
-            </div>
-        }
-    }
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CategoryName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UnitName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductDate)
+                                </td>
+                                <td uk-lightbox="animation: slide">
+                                    @*@Html.DisplayFor(modelItem => item.MainImage)*@
 
+                                    @if (!item.MainImage.IsNullOrWhiteSpace())
+                                    {
+                                        <a class="uk-inline" href="~/Content/Image/ProductsImage/@item.MainImage" data-caption="@item.Name">
+                                            <img class=" " style="width: 50px;height: 50px;" src="~/Content/Image/ProductsImage/@item.MainImage" alt="@item.Name">
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <p>عکسی ثبت نشده است</p>
+                                    }
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreateDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ModifeDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsDeleted)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsActive)
+                                </td>
+                                <td>
+                                    <span uk-tooltip="title: مشاهده جزیئات ; delay: 50">
+                                        @* @Html.ActionLink("Details", "Details", new { id = item.Id })*@
+                                        @Ajax.ActionLink(" ", MVC.Admin.ProductsManagment.Details(item.Id), new AjaxOptions
+                                        {
+                                            UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
+                                            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                                            HttpMethod = "GET", // <-- HTTP method
+                                            OnComplete = "ShowModal"
+                                        }, new {@class = "uk-button   uk-button-default  uk-button-small  bg-light  fa fa-list-ul" })
+                                    </span>
+
+                                    <span uk-tooltip="title: ویرایش ; delay: 50">
+
+                                        @Ajax.ActionLink(" ", MVC.Admin.ProductsManagment.Edit(item.Id), new AjaxOptions
+                                        {
+                                            UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
+                                            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                                            HttpMethod = "GET", // <-- HTTP method
+                                            OnComplete = "ShowModal"
+                                        }, new {@class = "uk-button uk-button-default   bg-light  uk-button-small  fa fa-edit " })
+                                    </span>
+
+                                    <span uk-tooltip="title: حذف ; delay: 50">
+                                        @Ajax.ActionLink(" ", MVC.Admin.ProductsManagment.ConfirmDelete(item.Id), new AjaxOptions
+                                        {
+                                            UpdateTargetId= "Modal_Body", // <-- DOM element ID to update
+                                            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                                            HttpMethod = "GET" ,// <-- HTTP method
+                                            OnComplete = "ShowModal"
+
+                                        }, new {@class = "uk-button uk-button-default bg-light  uk-button-small  fa fa-trash" })
+
+
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <br />
+
+                <div uk-alert class="   bg-secondary text-white  text-right">
+                    <a class="uk-alert-close" uk-close></a>
+                    <p class="mb-2">
+                        <span class="fa fa-exclamation-circle fa-2x"></span>
+                        هیچ محصولی ثبت نشده است
+                    </p>
+                </div>
+            }
+        }
+
+    </div>
 </div>
+
 <script>
-        
+
     $(document).ready(function () {
         // $('#dtCategory').dataTable({
         $('table.data-Table').dataTable({
@@ -142,22 +172,4 @@
     });
 
 </script>
-@*<script>
-
-        $(document).ready(function () {
-            $('#dtCategory').dataTable({
-                retrieve: true,
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'print'
-                ],
-
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Persian.json"
-                }
-            });
-
-
-        });
-    </script>*@
 

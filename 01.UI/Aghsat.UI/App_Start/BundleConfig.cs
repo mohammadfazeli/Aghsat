@@ -13,11 +13,11 @@ namespace Aghsat.UI
                         "~/Scripts/jquery.unobtrusive-ajax.js",
                         "~/Scripts/uikit.js",
                         "~/Scripts/uikit-icons.js",
-                        "~/Scripts/persianDatePicker.js",
-                        "~/Scripts/Fulldatatables.min.js"
+                        //"~/Scripts/Fulldatatables.min.js",
+                        "~/Scripts/Custom-datatables.min.js",
 
+                        "~/Scripts/persianDatePicker.js"
 
-            //"~/Scripts/Custom-datatables.min.js",
 
             //"~/Scripts/pwt-date.js",
             //"~/Scripts/pwt-datepicker.js",
@@ -43,9 +43,9 @@ namespace Aghsat.UI
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/toastr.js",
-                      "~/Scripts/toastr.config.js",
-                      "~/Content/MDB/js/mdb.js",
-                      "~/Content/MDB/js/addons/datatables.js"
+                      "~/Scripts/toastr.config.js"
+                      //"~/Content/MDB/js/mdb.js"
+                      //"~/Content/MDB/js/addons/datatables.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -57,9 +57,9 @@ namespace Aghsat.UI
                       "~/Content/font-awesome.css",
                       "~/Assets/fontawesome-free-5.6.3/css/all.css",
                       "~/Assets/persian_fonts_override.css",
-                      "~/Content/toastr.css",
-                      "~/Content/MDB/css/mdb.css",
-                      "~/Content/MDB/css/style.css"
+                      "~/Content/toastr.css"
+                      //"~/Content/MDB/css/mdb.css",
+                      //"~/Content/MDB/css/style.css"
                       //"~/Content/Custom-datatables.min.css",
                       //"~/Content/css/addons/datatables.css"
                       ));

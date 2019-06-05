@@ -2,12 +2,16 @@
 
 @{
     /**/
+
+    //Layout = ViewBag.lodaFromMain != null && ViewBag.lodaFromMain != true ?
+    //    "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml" : null;
+
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="m-3">
-
+<div class="">
     @Html.Partial("_SubjectForm")
+
     <div id="List">
         @ToastrHelper.ProcessToastrs()
         @Html.Action("ShowList")

@@ -1,13 +1,15 @@
 ﻿@using DNTBreadCrumb
 @{
-    var homeUrl = Url.Action("Index", "Home");
-    const string homePage = "صفحه اصلی";
+                /**/
 
-    var breadCrumbs = this.Context.Items[BreadCrumbExtentions.CurrentBreadCrumbKey] as List<BreadCrumb>;
-    var currentFullUrl = this.Request.Url.ToString();
-    var currentRouteUrl = Url.RouteUrl(this.ViewContext.RouteData.Values);
-    var isCurrentPageHomeUrl = homeUrl.Equals(currentFullUrl, StringComparison.OrdinalIgnoreCase) ||
-                               homeUrl.Equals(currentRouteUrl, StringComparison.OrdinalIgnoreCase);
+                var homeUrl = Url.Action("Index", "Home");
+                const string homePage = "صفحه اصلی";
+
+                var breadCrumbs = this.Context.Items[BreadCrumbExtentions.CurrentBreadCrumbKey] as List<BreadCrumb>;
+                var currentFullUrl = this.Request.Url.ToString();
+                var currentRouteUrl = Url.RouteUrl(this.ViewContext.RouteData.Values);
+                var isCurrentPageHomeUrl = homeUrl.Equals(currentFullUrl, StringComparison.OrdinalIgnoreCase) ||
+                                           homeUrl.Equals(currentRouteUrl, StringComparison.OrdinalIgnoreCase);
 }
 
 @if (breadCrumbs != null && breadCrumbs.Any())
@@ -43,21 +45,21 @@
                         if (node.Url.Equals(currentFullUrl, StringComparison.OrdinalIgnoreCase) ||
                             node.Url.Equals(currentRouteUrl, StringComparison.OrdinalIgnoreCase))
                         {
-                        <li class="active">
-                            /   @node.Title
-                            <span>
-                                <span class="float-right"> <span class="@node.GlyphIcon"></span> </span>
-                                <span class="float-left">
-                                    @node.Title  
+                            <li class="active">
+                                /   @node.Title
+                                <span>
+                                    <span class="float-right"> <span class="@node.GlyphIcon"></span> </span>
+                                    <span class="float-left">
+                                        @node.Title
+
+                                    </span>
 
                                 </span>
-
-                            </span>
-                            @if (!string.IsNullOrWhiteSpace(node.GlyphIcon))
-                            {
-                                <span class="@node.GlyphIcon" aria-hidden="true"></span>
-                            }
-                        </li>
+                                @if (!string.IsNullOrWhiteSpace(node.GlyphIcon))
+                                {
+                                    <span class="@node.GlyphIcon" aria-hidden="true"></span>
+                                }
+                            </li>
 
                         }
                         else

@@ -42,6 +42,7 @@ namespace T4MVC
     public class AdminClass
     {
         public readonly string Name = "Admin";
+        public Aghsat.UI.Areas.Admin.Controllers.AdminController Admin = new Aghsat.UI.Areas.Admin.Controllers.T4MVC_AdminController();
         public Aghsat.UI.Areas.Admin.Controllers.CategoryManagmentController CategoryManagment = new Aghsat.UI.Areas.Admin.Controllers.T4MVC_CategoryManagmentController();
         public Aghsat.UI.Areas.Admin.Controllers.PanelManagmentController PanelManagment = new Aghsat.UI.Areas.Admin.Controllers.T4MVC_PanelManagmentController();
         public Aghsat.UI.Areas.Admin.Controllers.ProductsManagmentController ProductsManagment = new Aghsat.UI.Areas.Admin.Controllers.T4MVC_ProductsManagmentController();
@@ -128,6 +129,7 @@ namespace Links
             public static readonly string popper_min_js_map = Url("popper.min.js.map");
         }
     
+        public static readonly string Fulldatatables_min_js = Url("Fulldatatables.min.js");
         public static readonly string index_d_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/index.d.min.js") ? Url("index.d.min.js") : Url("index.d.js");
         public static readonly string jalaali_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jalaali.min.js") ? Url("jalaali.min.js") : Url("jalaali.js");
         public static readonly string jquery_3_3_1_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-3.3.1.intellisense.min.js") ? Url("jquery-3.3.1.intellisense.min.js") : Url("jquery-3.3.1.intellisense.js");
@@ -205,11 +207,19 @@ namespace Links
         public static readonly string Custom_datatables_min_css = Url("Custom-datatables.min.css");
         public static readonly string font_awesome_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/font-awesome.min.css") ? Url("font-awesome.min.css") : Url("font-awesome.css");
         public static readonly string font_awesome_min_css = Url("font-awesome.min.css");
+        public static readonly string Fulldatatables_min_css = Url("Fulldatatables.min.css");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class Image {
             public const string UrlPath = "~/Content/Image";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class ProductsImage {
+                public const string UrlPath = "~/Content/Image/ProductsImage";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            }
+        
         }
     
         public static readonly string jquery_md_bootstrap_datetimepicker_style_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.md.bootstrap.datetimepicker.style.min.css") ? Url("jquery.md.bootstrap.datetimepicker.style.min.css") : Url("jquery.md.bootstrap.datetimepicker.style.css");
@@ -513,6 +523,7 @@ namespace Links
                 public static readonly string bootstrap_min_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/bootstrap.min.js"); 
                 public static readonly string Custom_datatables_min_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/Custom-datatables.min.js"); 
                 public static readonly string CustomScript_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/CustomScript.js"); 
+                public static readonly string Fulldatatables_min_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/Fulldatatables.min.js"); 
                 public static readonly string jalaali_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/jalaali.js"); 
                 public static readonly string jquery_3_3_1_intellisense_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/jquery-3.3.1.intellisense.js"); 
                 public static readonly string jquery_3_3_1_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/jquery-3.3.1.js"); 
@@ -550,6 +561,12 @@ namespace Links
         {
             public static partial class Image 
             {
+                public static partial class ProductsImage 
+                {
+                    public static class Assets
+                    {
+                    }
+                }
                 public static class Assets
                 {
                 }
@@ -721,6 +738,7 @@ namespace Links
                 public static readonly string Custom_datatables_min_css = T4MVCHelpers.ProcessAssetPath("~/Content/Custom-datatables.min.css");
                 public static readonly string font_awesome_css = T4MVCHelpers.ProcessAssetPath("~/Content/font-awesome.css");
                 public static readonly string font_awesome_min_css = T4MVCHelpers.ProcessAssetPath("~/Content/font-awesome.min.css");
+                public static readonly string Fulldatatables_min_css = T4MVCHelpers.ProcessAssetPath("~/Content/Fulldatatables.min.css");
                 public static readonly string jquery_md_bootstrap_datetimepicker_style_css = T4MVCHelpers.ProcessAssetPath("~/Content/jquery.md.bootstrap.datetimepicker.style.css");
                 public static readonly string persianDatepicker_default_css = T4MVCHelpers.ProcessAssetPath("~/Content/persianDatepicker-default.css");
                 public static readonly string pwt_datepicker_css = T4MVCHelpers.ProcessAssetPath("~/Content/pwt-datepicker.css");

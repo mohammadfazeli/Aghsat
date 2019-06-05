@@ -9,13 +9,19 @@ using Aghsat.UI.Classes.Attributes;
 using Aghsat.ViewModel.Product;
 using AutoMapper;
 using Aghsat.ServiceLayer;
+using System.Web;
+using System.IO;
+using System.Linq;
+using DNTBreadCrumb;
+
 namespace Aghsat.UI.Areas.Admin.Controllers
 {
-
+    [BreadCrumb(Title = "مدیریت محصولات", UseDefaultRouteUrl = true, RemoveAllDefaultRouteValues = true,
+        Order = 0, GlyphIcon = "fa fa-cart-plus")]
     [Icone("fa fa-cart-plus")]
     [Title("مدیریت محصولات")]
     [Menu()]
-    public partial class ProductsManagmentController : Controller
+    public partial class ProductsManagmentController : AdminController
     {
         #region Field       
 
@@ -39,11 +45,13 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         [Menu()]
         [HttpGet]
         // GET: Admin/Products
-        public virtual ActionResult Index()
+        public virtual ActionResult Index(bool lodaFromMain = false)
         {
+            //IslodaFromMain(lodaFromMain);
             return View();
         }
 
+        [BreadCrumb(Title = "مشاهده محصولات ها", Order = 1)]
         [Icone("fa fa-th-list")]
         [Title("مشاهده دسته بندی ها")]
         [HttpGet]
@@ -52,7 +60,7 @@ namespace Aghsat.UI.Areas.Admin.Controllers
             return PartialView("_ShowListProduct", _ProductsServices.GetListVms());
         }
 
-
+        [BreadCrumb(Title = "مشاهده محصولات ها", Order = 2)]
         // GET: Admin/Products/Details/5
         public virtual ActionResult Details(int? id)
         {
@@ -60,7 +68,10 @@ namespace Aghsat.UI.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = _ProductsServices.GetByID(id.GetValueOrDefault());
+
+            var product = _ProductsServices.GetDetailByID(id.GetValueOrDefault());
+
+            //Product product = _ProductsServices.GetByID(id.GetValueOrDefault());
             if (product == null)
             {
                 return HttpNotFound();
@@ -69,14 +80,20 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         }
 
         // GET: Admin/Products/Create
+        [BreadCrumb(Title = "محصول جدید", Order = 2)]
+
         [Icone("fa fa-save")]
         [Title("محصول جدید")]
         [HttpGet]
-        public virtual ActionResult Create()
+        public virtual ActionResult Create(bool lodaFromMain = false)
         {
+            //IslodaFromMain(lodaFromMain);
             return PartialView("_CreateProduct", _ProductsServices.GetAddVm());
         }
         // GET: Admin/Products/Edit/5
+
+        [Icone("fa fa-edit")]
+        [Title("ویرایش اطلاعات")]
         public virtual ActionResult Edit(int? id)
         {
             if (id == null)
@@ -101,19 +118,11 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         [Icone("fa fa-save")]
         [Title("محصول جدید")]
-        public virtual ActionResult Save(Product_Add_vm ViewModel)
+        public virtual ActionResult Save(Product_Add_vm ViewModel, HttpPostedFileBase file)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    product.ProductDate = Convert.ToDateTime(product.ProductDate);
-            //    db.Products.Add(product);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
 
-            //ViewBag.ProductsId = new SelectList(db.Categories, "Id", "Name", product.ProductsId);
-            //ViewBag.UnitId = new SelectList(db.Units, "Id", "Name", product.UnitId);
-            //return View(product);
+            if (file != null && file.ContentLength <= 0) return PartialView("_ShowListProducts", _ProductsServices.GetAddVm(ViewModel));
+
 
             if (!ModelState.IsValid && !Request.IsAjaxRequest())
             {
@@ -124,8 +133,12 @@ namespace Aghsat.UI.Areas.Admin.Controllers
 
             //try
             //{
+            var fileName = Path.GetFileName(file.FileName);
+            ViewModel.MainImage = fileName;
+
             var Products = Mapper.Map<Product_Add_vm, Product>(ViewModel);
-            Products.CreateDate = Convert.ToDateTime(Products.CreateDate).ToShortDateString().AsDateTime();
+            var path = Path.Combine(Server.MapPath("~/Content/Image/ProductsImage"), fileName);
+
             var result = _ProductsServices.Create(Products);
 
             switch (result)
@@ -133,10 +146,10 @@ namespace Aghsat.UI.Areas.Admin.Controllers
                 case AddStatus.Succeeded:
 
                     _uow.SaveAllChanges();
+                    file.SaveAs(path);
+
                     ToastrService.AddToUserQueue(new Toastr(message: "ثبت شد", type: ToastrType.Success));
-                    //return PartialView("_ShowListProduct", _ProductsServices.GetListVms());
-                    //return PartialView("_CreateProduct", _ProductsServices.GetAddVm());
-                    //return PartialView("_CreateProduct", _ProductsServices.GetAddVm());
+
                     return RedirectToAction(MVC.Admin.ProductsManagment.ShowList());
 
 
@@ -203,7 +216,22 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         //}
 
         // POST: Admin/Products/Delete/5
+
+        [Icone("fa fa-trash")]
+        [Title("حذف")]
         [HttpGet]
+        public virtual ActionResult ConfirmDelete(int id)
+        {
+            var Model = _ProductsServices.GetByID(id);
+            if (Model != null)
+            {
+                return PartialView("Delete", id);
+            }
+
+            return RedirectToAction(MVC.Admin.ProductsManagment.Index());
+        }
+
+        [HttpPost]
         public virtual ActionResult Delete(int id)
         {
             var result = _ProductsServices.delete(id);

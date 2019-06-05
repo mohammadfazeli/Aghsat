@@ -23,6 +23,13 @@ function Hide() {
     UIkit.modal("#modal-sections").hide();
 }
 
+function MainShowModal() {
+    UIkit.modal("#Main_modal-sections").show();
+}
+function MainHide() {
+    UIkit.modal("#Main_modal-sections").hide();
+}
+
 $(".DatePersion").persianDatepicker();
 
 //$('#date2').MdPersianDateTimePicker({

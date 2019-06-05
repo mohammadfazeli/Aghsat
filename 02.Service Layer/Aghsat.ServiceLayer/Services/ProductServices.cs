@@ -55,12 +55,6 @@ namespace Aghsat.ServiceLayer.Services
             }
         }
 
-        public override IEnumerable<Product> GetAll()
-        {
-            return _dbset.Include(p => p.Category)
-                .Include(p => p.Unit)
-                .Where(x => x.IsActive && !x.IsDeleted).ToList();
-        }
 
         public override updateStatus Update(Product entity)
         {
@@ -68,26 +62,42 @@ namespace Aghsat.ServiceLayer.Services
 
         }
 
+        #region Get
+        public override IEnumerable<Product> GetAll()
+        {
+            return _dbset.Include(p => p.Category)
+                .Include(p => p.Unit)
+                .Where(x => x.IsActive && !x.IsDeleted).ToList();
+        }
+
+        public Product_Detail_vm GetDetailByID(int id)
+        {
+            var Product = _dbset.Include(p => p.Category)
+                .Include(p => p.Unit)
+                .Where(x => x.IsActive && !x.IsDeleted && x.Id == id).FirstOrDefault();
+
+            return Product != null ?
+                Mapper.Map<Product, Product_Detail_vm>(source: Product) :
+                null;
+
+        }
+
         public Product_Add_vm GetAddVm()
         {
             return new Product_Add_vm()
-            { 
-                 UnitDropDownList = _unitService.GetAll(),
-                 CategoryDropDownList = _categoryServices.GetAllParentCategories()
+            {
+                UnitDropDownList = _unitService.GetAll(),
+                CategoryDropDownList = _categoryServices.GetAllParentCategories()
             };
         }
-
-
         public Product_Add_vm GetAddVm(Product_Add_vm ViewModel)
         {
             ViewModel.UnitDropDownList = _unitService.GetAll();
             ViewModel.CategoryDropDownList = _categoryServices.GetAllParentCategories();
             return ViewModel;
         }
-
         public Product_Add_vm GetAddVm(Product product)
         {
-
             return new Product_Add_vm()
             {
                 Id = product.Id,
@@ -102,17 +112,17 @@ namespace Aghsat.ServiceLayer.Services
                 IsDeleted = product.IsDeleted,
                 MainImage = product.MainImage,
                 ModifeDate = product.ModifeDate,
-                                              
+
             };
-            
+
         }
-
-
         public IEnumerable<Product_List_vm> GetListVms()
         {
             var products = GetAll();
             return Mapper.Map<IEnumerable<Product>, IEnumerable<Product_List_vm>>(products);
 
         }
+        #endregion
+
     }
 }

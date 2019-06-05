@@ -66,6 +66,12 @@ namespace Aghsat.UI.App_Start
                     .ForMember(d => d.CategoryName, act => act.MapFrom(s => s.Category.Name))
                     .ForMember(d => d.UnitName, act => act.MapFrom(s => s.Unit.Name))
                     .ForMember(d => d.CategoryName, act => act.MapFrom(s => s.Category.Name));
+                //-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+
+                x.CreateMap<Product, Product_Detail_vm>()
+                    .ForMember(d => d.CategoryName, act => act.MapFrom(s => s.Category.Name))
+                    .ForMember(d => d.UnitName, act => act.MapFrom(s => s.Unit.Name))
+                    .ForMember(d => d.CategoryName, act => act.MapFrom(s => s.Category.Name));
                 //.ForMember(d => d.ParentCategoryName, act => act.MapFrom(s => s.Category.ParentCategory.Name ==null ? "farhad" :",ah"));
 
                 #endregion

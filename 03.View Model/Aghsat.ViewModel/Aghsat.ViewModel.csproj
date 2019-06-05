@@ -60,6 +60,7 @@
     <Compile Include="Category\Category_Add_vm.cs" />
     <Compile Include="Category\Category_List_vm.cs" />
     <Compile Include="Product\Product_Add_vm.cs" />
+    <Compile Include="Product\Product_Detail_vm.cs" />
     <Compile Include="Product\Product_List_vm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Slider\Slider_Add_vm.cs" />
