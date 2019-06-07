@@ -2,23 +2,24 @@
 
 @using Microsoft.Ajax.Utilities
 @model IEnumerable<Aghsat.ViewModel.Product.Product_List_vm>
-<div class="border border-dark  uk-box-shadow-hover-large">
+<div class="border border-dark  uk-box-shadow-hover-large bg-light">
 
+  
     <div class=" table-responsive  bg-light p-3 ">
 
-        <div class="float-right  form-inline">
+        <div class="float-right   dt-buttons btn-group ">
             @Ajax.ActionLink("جدید", MVC.Admin.ProductsManagment.Create(), new AjaxOptions
-            {
-                UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
-                InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-                HttpMethod = "GET", // <-- HTTP method
-                OnComplete = "ShowModal"
-            }, new {@class = "uk-button uk-button-secondary uk-button-small"})
+       {
+           UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
+           InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+           HttpMethod = "GET", // <-- HTTP method
+           OnComplete = "ShowModal"
+       }, new {@class = "btn btn-info bg-info rounded-0 " })
         </div>
         @{
             if (Model != null && Model.Any())
             {
-                <table id="dtCategory" style="width: 100%" class="table  data-Table table-dark  table-hover  table-bordered text-center">
+                <table id="dtCategory" style="width: 100%" class="table table-dark  data-Table  table-hover  table-bordered text-center">
                     <thead>
                         <tr>
                             <th>

@@ -47,30 +47,46 @@
 
     <!-- Container -->
     <div class="container-fluid @*body-content*@">
-        <br />
 
-        @{Html.RenderPartial("_BreadCrumb");}
+
+        @*@{Html.RenderPartial("_BreadCrumb");}*@
         <hr />
         @RenderBody()
+        @Html.Partial("_Modal")
+
     </div>
 
-    @*@Html.Partial("_ModalMain")*@
+   @Html.Partial("_ModalMain")
 
+    @{
+        if (ViewBag.Message != null)
+        {
+            @*@ViewBag.Message*@
+            <script>
+    $(function() {
+                toastr.success(' @ViewBag.Message', 'asdo');
+    });
+            </script>
+
+
+
+        }
+    }
     @Scripts.Render("~/bundles/jquery")
 
     @Scripts.Render("~/bundles/CustomScripts")
     <script>
-    $(function() {
+        $(function() {
 
-        $(".DatePersion").persianDatepicker({
-        formatDate: "YYYY/MM/DD"
-         });
-    });
+            $(".DatePersion").persianDatepicker({
+                formatDate: "YYYY/MM/DD"
+            });
+        });
     </script>
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
 
-    @ToastrHelper.ProcessToastrs()
+    @*@ToastrHelper.ProcessToastrs()*@
 
     @*@Scripts.Render("~/Scripts/Custom-datatables.min.js")*@
 

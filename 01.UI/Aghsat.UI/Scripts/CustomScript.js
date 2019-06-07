@@ -16,21 +16,25 @@
 
 
 
-function ShowModal() {
-    UIkit.modal("#modal-sections").show();
+function ShowModal() { 
+     UIkit.modal("#modal-sections", { bgClose: false, escClose: false, modal: false, keyboard:false}).show();
+
 }
-function Hide() {
+function HideModal() {
     UIkit.modal("#modal-sections").hide();
+
 }
 
-function MainShowModal() {
-    UIkit.modal("#Main_modal-sections").show();
+function OnSuccess(data) {
+
+        ShowMessage(data.Msg,data.type)
+        if ( data.type = "")
+            HideModal();
 }
-function MainHide() {
-    UIkit.modal("#Main_modal-sections").hide();
-}
+
 
 $(".DatePersion").persianDatepicker();
+
 
 //$('#date2').MdPersianDateTimePicker({
 //    targetTextSelector: '#inputDate2',

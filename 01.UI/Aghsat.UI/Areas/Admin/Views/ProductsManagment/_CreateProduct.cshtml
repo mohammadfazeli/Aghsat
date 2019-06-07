@@ -9,6 +9,8 @@
 
     Layout = null;
 }
+@Html.Partial("_SubjectForm")
+
 
 <script>
 
@@ -17,15 +19,15 @@
     });
 </script>
 
-@Html.Partial("_SubjectForm")
 
 <div class="border border-dark  bg-light p-3">
 
     @using (Ajax.BeginForm(MVC.Admin.ProductsManagment.Save(), new AjaxOptions
     {
         HttpMethod = "Post",
-        UpdateTargetId = "List",
-        OnSuccess = "Hide"
+        OnSuccess = "OnSuccess",
+        //UpdateTargetId = "List",
+
     }, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
@@ -57,8 +59,8 @@
                             @Html.DisplayNameFor(x => x.ProductDate)
                         </span>
                     </div>
-                    <input name="ProductDate" class="DatePersion form-control uk-input" placeholder="تاریخ وارد کنید" />
-                    @*@Html.TextBoxFor(x => x.ProductDate, new { @class = "DatePersion form-control uk-input text-left", value = " ", placeholder = "تاریخ وارد کنید", id = "ProductDate" })*@
+                    @*<input name="ProductDate" class="DatePersion form-control uk-input" placeholder="تاریخ وارد کنید" />*@
+                    @Html.TextBoxFor(x => x.ProductDate, new { @class = "DatePersion form-control uk-input ", value = " ", placeholder = "تاریخ وارد کنید", id = "ProductDate" })
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             @Html.ValidationMessageFor(x => x.ProductDate, "", new { @class = "text-danger" })
@@ -70,7 +72,9 @@
 
 
             <div class="form-group">
-                <input type="file" name="file" id="file" />
+                @*  <input type="file" name="file" id="file" />*@
+                @Html.TextBoxFor(x => Model.MainImage, new { type = "file" })
+                @Html.ValidationMessageFor(m => m.MainImage)
             </div>
 
             <div class="row form-inline">
@@ -131,11 +135,26 @@
                 </div>
 
             </div>
+
+
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Create" class="uk-button uk-button-primary" />
+                    @Ajax.ActionLink("بستن", MVC.Admin.ProductsManagment.ShowList(), new AjaxOptions
+                    {
+                        UpdateTargetId= "List", // <-- DOM element ID to update
+                        InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                        HttpMethod = "GET" ,// <-- HTTP method
+
+                    }, new {@class = "uk-button uk-button-default uk-modal-close" })
+
+
                 </div>
             </div>
+
+
+
         </div>
     }
 </div>
@@ -145,7 +164,3 @@
 <br />
 
 @Scripts.Render("~/bundles/jqueryval")
-
-
-
-

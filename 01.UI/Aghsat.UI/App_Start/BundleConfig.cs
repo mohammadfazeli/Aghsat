@@ -32,7 +32,9 @@ namespace Aghsat.UI
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/CustomScripts").Include(
-                "~/Scripts/CustomScript.js"
+                "~/Scripts/CustomScript.js",
+                "~/Scripts/CustomShowMessage.js"
+
             ));
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

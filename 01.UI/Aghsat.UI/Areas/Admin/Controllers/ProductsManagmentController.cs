@@ -13,6 +13,7 @@ using System.Web;
 using System.IO;
 using System.Linq;
 using DNTBreadCrumb;
+using Microsoft.Owin.Security.Provider;
 
 namespace Aghsat.UI.Areas.Admin.Controllers
 {
@@ -57,6 +58,8 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         [HttpGet]
         public virtual ActionResult ShowList()
         {
+            ToastrService.AddToUserQueue(new Toastr(message: "ثبت شد", type: ToastrType.Success));
+
             return PartialView("_ShowListProduct", _ProductsServices.GetListVms());
         }
 
@@ -88,7 +91,7 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         public virtual ActionResult Create(bool lodaFromMain = false)
         {
             //IslodaFromMain(lodaFromMain);
-            return PartialView("_CreateProduct", _ProductsServices.GetAddVm());
+            return View("_CreateProduct", _ProductsServices.GetAddVm());
         }
         // GET: Admin/Products/Edit/5
 
@@ -118,13 +121,10 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         [Icone("fa fa-save")]
         [Title("محصول جدید")]
-        public virtual ActionResult Save(Product_Add_vm ViewModel, HttpPostedFileBase file)
+        public virtual ActionResult Save(Product_Add_vm ViewModel, HttpPostedFileBase MainImage)
         {
 
-            if (file != null && file.ContentLength <= 0) return PartialView("_ShowListProducts", _ProductsServices.GetAddVm(ViewModel));
-
-
-            if (!ModelState.IsValid && !Request.IsAjaxRequest())
+            if (!ModelState.IsValid && !Request.IsAjaxRequest() || MainImage == null)
             {
                 ToastrService.SetMessage(ToastrType.Info, "اشکال در ثبت");
                 return PartialView("_ShowListProducts", _ProductsServices.GetAddVm(ViewModel));
@@ -133,7 +133,7 @@ namespace Aghsat.UI.Areas.Admin.Controllers
 
             //try
             //{
-            var fileName = Path.GetFileName(file.FileName);
+            var fileName = Path.GetFileName(MainImage.FileName);
             ViewModel.MainImage = fileName;
 
             var Products = Mapper.Map<Product_Add_vm, Product>(ViewModel);
@@ -146,84 +146,38 @@ namespace Aghsat.UI.Areas.Admin.Controllers
                 case AddStatus.Succeeded:
 
                     _uow.SaveAllChanges();
-                    file.SaveAs(path);
-
-                    ToastrService.AddToUserQueue(new Toastr(message: "ثبت شد", type: ToastrType.Success));
-
+                    MainImage.SaveAs(path);
                     return RedirectToAction(MVC.Admin.ProductsManagment.ShowList());
 
-
                 case AddStatus.Exist:
-                    ToastrService.AddToUserQueue(new Toastr(message: "تکراری", type: ToastrType.Info));
-                    break;
 
+                    Messagetype = AddStatus.Exist.ToString();
+                    Message = "";
+                    break;
                 case AddStatus.Error:
-                    ToastrService.AddToUserQueue(new Toastr(message: "خطا", type: ToastrType.Error));
-                    break;
 
+                    Messagetype = AddStatus.Error.ToString();
+                    Message = "";
+                    break;
                 case AddStatus.Fail:
-                    ToastrService.AddToUserQueue(new Toastr(message: "خطا", type: ToastrType.Warning));
-                    break;
 
+                    Messagetype = AddStatus.Fail.ToString();
+                    Message = "";
+                    break;
 
             }
-            return PartialView("_ShowListProducts", _ProductsServices.GetAddVm(ViewModel));
-            //}
-            //catch (Exception ex)
+            return Json(new { type = Messagetype, Msg = Message });
 
-            //{
-            //    ToastrService.SetMessage(ToastrType.Warning, "خطا در ثبت");
-
-            //    return PartialView("_ShowListProducts", _ProductsServices.GetAddVm(ViewModel));
-
-            //}
 
         }
-
-
-
-        //// POST: Admin/Products/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public virtual ActionResult Edit([Bind(Include = "Id,Name,ProductDate,MainImage,UnitId,ProductsId,CreateDate,ModifeDate,IsDeleted,IsActive")] Product product)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(product).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.ProductsId = new SelectList(db.Categories, "Id", "Name", product.ProductsId);
-        //    ViewBag.UnitId = new SelectList(db.Units, "Id", "Name", product.UnitId);
-        //    return View(product);
-        //}
-
-        //// GET: Admin/Products/Delete/5
-        //public virtual ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Product product = _ProductsServices.GetByID(id.GetValueOrDefault());
-        //    if (product == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(product);
-        //}
-
-        // POST: Admin/Products/Delete/5
 
         [Icone("fa fa-trash")]
         [Title("حذف")]
         [HttpGet]
         public virtual ActionResult ConfirmDelete(int id)
         {
-            var Model = _ProductsServices.GetByID(id);
-            if (Model != null)
+
+            if (id > 0)
             {
                 return PartialView("Delete", id);
             }
@@ -234,30 +188,49 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         [HttpPost]
         public virtual ActionResult Delete(int id)
         {
+
+            var fileName = _ProductsServices.GetByID(id).MainImage;
+            var path = Path.Combine(Server.MapPath("~/Content/Image/ProductsImage"), fileName);
+
             var result = _ProductsServices.delete(id);
             switch (result)
             {
                 case DeleteStatus.Succeeded:
+                    try
+                    {
+                        var file = new FileInfo(path);
+                        if (file.Exists)
+                        {
 
-                    _uow.SaveAllChanges();
-                    ToastrService.AddToUserQueue(new Toastr(message: "ثبت شد", type: ToastrType.Success));
+                            file.Delete();
+                        }
+                    }
+                    finally
+                    {
+                        _uow.SaveAllChanges();
+
+                    }
                     return RedirectToAction(MVC.Admin.ProductsManagment.ShowList());
 
                 case DeleteStatus.NotExist:
-                    ToastrService.AddToUserQueue(new Toastr(message: "وجود ندارد", type: ToastrType.Info));
-                    break;
 
+                    Messagetype = DeleteStatus.NotExist.ToString();
+                    Message = "";
+                    break;
                 case DeleteStatus.Error:
-                    ToastrService.AddToUserQueue(new Toastr(message: "خطا", type: ToastrType.Error));
-                    break;
 
+                    Messagetype = DeleteStatus.Error.ToString();
+                    Message = "";
+                    break;
                 case DeleteStatus.Fail:
-                    ToastrService.AddToUserQueue(new Toastr(message: "خطا", type: ToastrType.Warning));
-                    break;
 
+                    Messagetype = DeleteStatus.Fail.ToString();
+                    Message = "";
+                    break;
 
             }
-            return PartialView("_ShowListProducts", _ProductsServices.GetAddVm());
+            return Json(new { type = Messagetype, Msg = Message });
+
         }
 
 

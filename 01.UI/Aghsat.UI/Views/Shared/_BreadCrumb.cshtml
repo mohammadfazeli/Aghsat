@@ -1,21 +1,19 @@
 ﻿@using DNTBreadCrumb
 @{
-                /**/
+    var homeUrl = Url.Action("Index", "Home");
+    const string homePage = "Home";
 
-                var homeUrl = Url.Action("Index", "Home");
-                const string homePage = "صفحه اصلی";
-
-                var breadCrumbs = this.Context.Items[BreadCrumbExtentions.CurrentBreadCrumbKey] as List<BreadCrumb>;
-                var currentFullUrl = this.Request.Url.ToString();
-                var currentRouteUrl = Url.RouteUrl(this.ViewContext.RouteData.Values);
-                var isCurrentPageHomeUrl = homeUrl.Equals(currentFullUrl, StringComparison.OrdinalIgnoreCase) ||
-                                           homeUrl.Equals(currentRouteUrl, StringComparison.OrdinalIgnoreCase);
+    var breadCrumbs = this.Context.Items[BreadCrumbExtentions.CurrentBreadCrumbKey] as List<BreadCrumb>;
+    var currentFullUrl = this.Request.Url.ToString();
+    var currentRouteUrl = Url.RouteUrl(this.ViewContext.RouteData.Values);
+    var isCurrentPageHomeUrl = homeUrl.Equals(currentFullUrl, StringComparison.OrdinalIgnoreCase) ||
+                               homeUrl.Equals(currentRouteUrl, StringComparison.OrdinalIgnoreCase);
 }
 
 @if (breadCrumbs != null && breadCrumbs.Any())
 {
     <div class="container">
-        <div class="row  " style="direction: rtl">
+        <div class="row">
             <div class="col-md-12">
                 <ol class="breadcrumb">
                     @if (isCurrentPageHomeUrl)
@@ -28,7 +26,7 @@
                     else
                     {
                         <li>
-                            <a href="@homeUrl">
+                            <a href="  @homeUrl">
                                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                 @homePage
                             </a>
@@ -46,33 +44,22 @@
                             node.Url.Equals(currentRouteUrl, StringComparison.OrdinalIgnoreCase))
                         {
                             <li class="active">
-                                /   @node.Title
-                                <span>
-                                    <span class="float-right"> <span class="@node.GlyphIcon"></span> </span>
-                                    <span class="float-left">
-                                        @node.Title
-
-                                    </span>
-
-                                </span>
                                 @if (!string.IsNullOrWhiteSpace(node.GlyphIcon))
                                 {
                                     <span class="@node.GlyphIcon" aria-hidden="true"></span>
                                 }
+                             /   @node.Title
                             </li>
-
                         }
                         else
                         {
                             <li>
                                 <a href="@node.Url">
-
-
                                     @if (!string.IsNullOrWhiteSpace(node.GlyphIcon))
                                     {
                                         <span class="@node.GlyphIcon" aria-hidden="true"></span>
                                     }
-                                    / @node.Title
+                                    @node.Title
                                 </a>
                             </li>
                         }

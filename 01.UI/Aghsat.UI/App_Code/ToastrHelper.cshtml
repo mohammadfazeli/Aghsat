@@ -13,29 +13,29 @@
     }
 }
 
-@*@helper ShowToastrType(Aghsat.UI.ToastrType item)
+@helper ShowToastrType(Aghsat.UI.ToastrType type,string message, string Title = "")
 {
 
 
-    switch (item)
+    switch (type)
     {
         case Aghsat.UI.ToastrType.Info:
-            @ToastrInfo("", item.Title)
+            @ToastrInfo(message, Title)
             break;
         case Aghsat.UI.ToastrType.Success:
-            @ToastrSuccess("عملیات با موفقیت انجام گردید", "")
+            @ToastrSuccess("عملیات با موفقیت انجام گردید", Title)
             break;
         case Aghsat.UI.ToastrType.Warning:
-            @ToastrWarning(, item.Title)
+            @ToastrWarning(message, Title)
             break;
         case Aghsat.UI.ToastrType.Error:
-            @ToastrError(item.Message, item.Title)
+            @ToastrError("خطایی رخ داده است.دوباره تلاش کنید", Title)
             break;
         default:
-            @ToastrInfo(item.Message, item.Title)
+            @ToastrInfo(message, Title)
             break;
     }
-}*@
+}
 
 
 @helper ShowToastr(Aghsat.UI.Toastr item)
