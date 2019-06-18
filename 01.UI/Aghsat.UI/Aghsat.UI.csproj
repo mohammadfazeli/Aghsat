@@ -184,7 +184,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SliderManagmentController.cs" />
+    <Compile Include="Classes\AutoMapperConfig\CategoryMapping.cs" />
+    <Compile Include="Classes\AutoMapperConfig\IgnoreVirtualExtensions.cs" />
     <Compile Include="Classes\AutoMapperConfig\ProductMapping.cs" />
+    <Compile Include="Classes\AutoMapperConfig\PictureMapping.cs" />
+    <Compile Include="Classes\AutoMapperConfig\SliderMapping.cs" />
     <Compile Include="T4MVC\AccountController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -201,6 +206,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\Admin.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\Admin.SliderManagmentController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\Admin.UnitsController.generated.cs">
@@ -509,7 +517,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Modal.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_SubjectForm.cshtml" />
     <Content Include="Areas\Admin\Views\ProductsManagment\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductsManagment\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_DeleteModal.cshtml" />
     <Content Include="Areas\Admin\Views\ProductsManagment\Details.cshtml" />
     <Content Include="Areas\Admin\Views\ProductsManagment\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ProductsManagment\Index.cshtml" />
@@ -523,6 +531,22 @@
     <Content Include="Areas\Admin\Views\ProductsManagment\_CreateProduct.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_ModalAdminLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_ModalMain.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_PictureAdd.cshtml" />
+    <Content Include="Areas\Admin\Views\SliderManagment\_CreateSlider.cshtml" />
+    <Content Include="Areas\Admin\Views\SliderManagment\_ShowListSlider.cshtml" />
+    <Content Include="Areas\Admin\Views\SliderManagment\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SliderManagment\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\SliderManagment\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\SliderManagment\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SliderManagment\Index.cshtml" />
+    <Content Include="App_Code\ToolsForm.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ToolsEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ToolsSetAddPicture.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ToolsConfirmDelete.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ToolsCloseModal.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_NotingModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ToolsDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ToolsAdd.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jalaali.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

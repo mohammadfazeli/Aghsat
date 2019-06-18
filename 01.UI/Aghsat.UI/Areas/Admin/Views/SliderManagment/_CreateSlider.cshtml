@@ -1,0 +1,83 @@
+﻿@model Aghsat.ViewModel.Slider.Slider_Add_vm
+
+    @{
+        Layout = null;
+    }
+    @Html.Partial("_SubjectForm")
+
+
+    <div class="border border-dark  bg-light p-3">
+
+        @using (Ajax.BeginForm(MVC.Admin.SliderManagment.Save(), new AjaxOptions
+        {
+            HttpMethod = "Post",
+            OnSuccess = "OnSuccess",
+            //UpdateTargetId = "List",
+
+        }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="uk-panel">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(x => x.Id)
+                <div class="form-group">
+                    <div class="input-group  input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                @Html.DisplayNameFor(x => x.Title)
+                            </span>
+                        </div>
+                        @Html.TextBoxFor(x => x.Title, new { @class = "form-control uk-input" })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-group  input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                @Html.DisplayNameFor(x => x.Title)
+                            </span>
+                        </div>
+                        @Html.TextBoxFor(x => x.Title, new { @class = "form-control uk-input" })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="uk-button uk-button-primary" />
+                        @Ajax.ActionLink("بستن", MVC.Admin.SliderManagment.ShowList(), new AjaxOptions
+                        {
+                            UpdateTargetId= "List", // <-- DOM element ID to update
+                            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                            HttpMethod = "GET" ,// <-- HTTP method
+
+                        }, new {@class = "uk-button uk-button-default uk-modal-close" })
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        }
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    @Scripts.Render("~/bundles/jqueryval")

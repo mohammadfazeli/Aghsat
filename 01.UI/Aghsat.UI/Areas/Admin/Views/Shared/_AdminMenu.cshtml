@@ -44,11 +44,9 @@
 
     </div>*@
 <!-- Old Menu-->
-<br />
-<br />
-<br />
-<div class="uk-card   uk-card-default uk-card-body" style="background-color: #dee2e6 !important;">
-    <ul class="uk-nav-default uk-nav-parent-icon  bg-dark " uk-nav>
+
+<div class="uk-card   uk-card-default uk-card-body bg-dark " >
+    <ul class="uk-nav-default uk-nav-parent-icon  " uk-nav>
         @{
             foreach (var item in Model.Select(x => new { name = x.ControllerName, Icon = x.ControllerIcon }).Distinct())
             {
@@ -56,7 +54,7 @@
                 @*<li class="uk-active"><a href="#">Active</a></li>*@
                 <li class="uk-parent ">
                     @*<a href="#">Parent</a>*@
-                    <a class="bg-dark p-2 m-0  list-inline text-center" style="display: block;" href="#"><span class="@item.Icon  float-right"></span>@item.name </a>
+                    <a class="p-2 m-0  list-inline text-center" style="display: block;" href="#"><span class="@item.Icon  float-right"></span>@item.name </a>
 
                     @*<ul class="uk-nav-sub" >*@
                     @*<li><a href="#">Sub item</a></li>*@

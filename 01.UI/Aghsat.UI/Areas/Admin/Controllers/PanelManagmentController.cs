@@ -179,8 +179,6 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         public virtual ActionResult SaveUserSlide()
         {
             return View();
-
-
         }
 
         [HttpGet]
@@ -221,7 +219,7 @@ namespace Aghsat.UI.Areas.Admin.Controllers
             try
             {
                 var fileName = Path.GetFileName(file.FileName);
-                img.ImageName = fileName;
+                //img.ImageName = fileName;
 
                 var path = Path.Combine(Server.MapPath("~/Content/Image"), fileName);
                 if (_PanelManagmentService.SaveImageSlide(img) == AddStatus.Succeeded)

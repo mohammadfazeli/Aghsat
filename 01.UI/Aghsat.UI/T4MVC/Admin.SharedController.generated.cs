@@ -40,17 +40,31 @@ namespace T4MVC.Admin
             {
                 public readonly string _AdminLayout = "_AdminLayout";
                 public readonly string _AdminMenu = "_AdminMenu";
+                public readonly string _DeleteModal = "_DeleteModal";
                 public readonly string _Modal = "_Modal";
                 public readonly string _ModalAdminLayout = "_ModalAdminLayout";
                 public readonly string _ModalMain = "_ModalMain";
+                public readonly string _NotingModel = "_NotingModel";
+                public readonly string _PictureAdd = "_PictureAdd";
                 public readonly string _SubjectForm = "_SubjectForm";
+                public readonly string _ToolsCloseModal = "_ToolsCloseModal";
+                public readonly string _ToolsConfirmDelete = "_ToolsConfirmDelete";
+                public readonly string _ToolsEdit = "_ToolsEdit";
+                public readonly string _ToolsSetAddPicture = "_ToolsSetAddPicture";
             }
             public readonly string _AdminLayout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
             public readonly string _AdminMenu = "~/Areas/Admin/Views/Shared/_AdminMenu.cshtml";
+            public readonly string _DeleteModal = "~/Areas/Admin/Views/Shared/_DeleteModal.cshtml";
             public readonly string _Modal = "~/Areas/Admin/Views/Shared/_Modal.cshtml";
             public readonly string _ModalAdminLayout = "~/Areas/Admin/Views/Shared/_ModalAdminLayout.cshtml";
             public readonly string _ModalMain = "~/Areas/Admin/Views/Shared/_ModalMain.cshtml";
+            public readonly string _NotingModel = "~/Areas/Admin/Views/Shared/_NotingModel.cshtml";
+            public readonly string _PictureAdd = "~/Areas/Admin/Views/Shared/_PictureAdd.cshtml";
             public readonly string _SubjectForm = "~/Areas/Admin/Views/Shared/_SubjectForm.cshtml";
+            public readonly string _ToolsCloseModal = "~/Areas/Admin/Views/Shared/_ToolsCloseModal.cshtml";
+            public readonly string _ToolsConfirmDelete = "~/Areas/Admin/Views/Shared/_ToolsConfirmDelete.cshtml";
+            public readonly string _ToolsEdit = "~/Areas/Admin/Views/Shared/_ToolsEdit.cshtml";
+            public readonly string _ToolsSetAddPicture = "~/Areas/Admin/Views/Shared/_ToolsSetAddPicture.cshtml";
         }
     }
 

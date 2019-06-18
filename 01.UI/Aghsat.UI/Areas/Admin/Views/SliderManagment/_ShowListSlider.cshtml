@@ -1,0 +1,150 @@
+﻿
+
+@using Microsoft.Ajax.Utilities
+@model IEnumerable<Aghsat.ViewModel.Slider.Slider_List_vm>
+<div class="border border-dark  uk-box-shadow-hover-large bg-light">
+
+
+    <div class=" table-responsive  bg-light p-3 ">
+
+        <div class="float-right   dt-buttons btn-group ">
+            @Ajax.ActionLink("جدید", MVC.Admin.SliderManagment.Create(), new AjaxOptions
+       {
+           UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
+           InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+           HttpMethod = "GET", // <-- HTTP method
+           OnComplete = "ShowModal"
+       }, new {@class = "btn btn-info bg-info rounded-0 " })
+        </div>
+        @{
+            if (Model != null && Model.Any())
+            {
+                <table id="dtCategory" style="width: 100%" class="table table-dark  data-Table  table-hover  table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Title)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PictureName)
+                            </th>
+                           
+                            <th>
+                                @Html.DisplayNameFor(model => model.CreateDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ModifeDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsDeleted)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsActive)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+
+                                <td uk-lightbox="animation: slide">
+
+                                    @if (!item.PictureName.IsNullOrWhiteSpace())
+                                    {
+                                        <a class="uk-inline" href="~/Content/Image/ProductsImage/@item.PictureName" data-caption="@item.PictureName">
+                                            <img class=" " style="width: 50px;height: 50px;" src="~/Content/Image/ProductsImage/@item.PictureName" alt="@item.PictureName">
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <p>عکسی ثبت نشده است</p>
+                                    }
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreateDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ModifeDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsDeleted)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsActive)
+                                </td>
+                                <td>
+
+
+                                    <span uk-tooltip="title: @Resources.Resource.Edit ; delay: 50">
+
+                                        @Ajax.ActionLink(" ", MVC.Admin.SliderManagment.Edit(item.Id), new AjaxOptions
+                                        {
+                                            UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
+                                            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                                            HttpMethod = "GET", // <-- HTTP method
+                                            OnComplete = "ShowModal"
+                                        }, new {@class = "uk-button uk-button-default   bg-light  uk-button-small  fa fa-edit " })
+                                    </span>
+
+                                    <span uk-tooltip="title:  @Resources.Resource.Delete  ; delay: 50">
+                                        @Ajax.ActionLink(" ", MVC.Admin.SliderManagment.ConfirmDelete(item.Id), new AjaxOptions
+                                        {
+                                            UpdateTargetId= "Modal_Body", // <-- DOM element ID to update
+                                            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                                            HttpMethod = "GET" ,// <-- HTTP method
+                                            OnComplete = "ShowModal"
+
+                                        }, new {@class = "uk-button uk-button-default bg-light  uk-button-small  fa fa-trash" })
+
+
+                                    </span>
+ 
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <br />
+
+                <div uk-alert class="   bg-secondary text-white  text-right">
+                    <a class="uk-alert-close" uk-close></a>
+                    <p class="mb-2">
+                        <span class="fa fa-exclamation-circle fa-2x"></span>
+                        هیچ محصولی ثبت نشده است
+                    </p>
+                </div>
+            }
+        }
+
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        // $('#dtCategory').dataTable({
+        $('table.data-Table').dataTable({
+            retrieve: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'print'
+            ],
+
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Persian.json"
+            }
+        });
+    });
+
+</script>
+

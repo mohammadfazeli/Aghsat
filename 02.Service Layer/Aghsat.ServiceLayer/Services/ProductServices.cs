@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,25 +41,36 @@ namespace Aghsat.ServiceLayer.Services
 
         }
 
-        public override DeleteStatus delete(int? id)
-        {
-            try
-            {
-                var Product = _dbset.Find(id);
-                if (Product == null) return DeleteStatus.NotExist;
-                _dbset.Remove(Product);
-                return DeleteStatus.Succeeded;
-            }
-            catch (Exception)
-            {
-                return DeleteStatus.Error;
-            }
-        }
+        //public override DeleteStatus delete(int? id)
+        //{
+        //    try
+        //    {
+        //        var Product = _dbset.Find(id);
+        //        if (Product == null) return DeleteStatus.NotExist;
+        //        _dbset.Remove(Product);
+        //        return DeleteStatus.Succeeded;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex);
+        //        return DeleteStatus.Error;
+        //    }
+        //}
 
 
         public override updateStatus Update(Product entity)
         {
-            return updateStatus.Succeeded;
+
+            try
+            {
+                if (_dbset.Any(x => x.Name == entity.Name && !x.IsDeleted && x.IsActive && x.Id != entity.Id)) return updateStatus.Exist;
+                _dbset.AddOrUpdate(entity);
+                return updateStatus.Succeeded;
+            }
+            catch (Exception ex)
+            {
+                return updateStatus.Error;
+            }
 
         }
 

@@ -1,11 +1,15 @@
-﻿namespace Aghsat.Domain.Entity
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Aghsat.Domain.Entity
 {
     public class Slider : BaseEntity
     {
-        public string ImageName { get; set; }
+        [MaxLength(30)]
+        [Required]
+        public string PictureName { get; set; }
         public string Title { get; set; }
         public string ShortDescription { get; set; }
-        public int order { get; set; }
+        public int? DisplayPriority { get; set; }
 
     }
 }

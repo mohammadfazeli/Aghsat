@@ -140,6 +140,26 @@
     <Compile Include="Migrations\201905261730382_formatdate_2.Designer.cs">
       <DependentUpon>201905261730382_formatdate_2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906091843084_ChangeSomeEntity.cs" />
+    <Compile Include="Migrations\201906091843084_ChangeSomeEntity.Designer.cs">
+      <DependentUpon>201906091843084_ChangeSomeEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906111914541_Edit_PictureAnd_AutoMapperConfig.cs" />
+    <Compile Include="Migrations\201906111914541_Edit_PictureAnd_AutoMapperConfig.Designer.cs">
+      <DependentUpon>201906111914541_Edit_PictureAnd_AutoMapperConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906131931416_AddPicture.cs" />
+    <Compile Include="Migrations\201906131931416_AddPicture.Designer.cs">
+      <DependentUpon>201906131931416_AddPicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906132039590_backToGood.cs" />
+    <Compile Include="Migrations\201906132039590_backToGood.Designer.cs">
+      <DependentUpon>201906132039590_backToGood.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906151829516_BackSlider.cs" />
+    <Compile Include="Migrations\201906151829516_BackSlider.Designer.cs">
+      <DependentUpon>201906151829516_BackSlider.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -189,6 +209,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905261730382_formatdate_2.resx">
       <DependentUpon>201905261730382_formatdate_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906091843084_ChangeSomeEntity.resx">
+      <DependentUpon>201906091843084_ChangeSomeEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906111914541_Edit_PictureAnd_AutoMapperConfig.resx">
+      <DependentUpon>201906111914541_Edit_PictureAnd_AutoMapperConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906131931416_AddPicture.resx">
+      <DependentUpon>201906131931416_AddPicture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906132039590_backToGood.resx">
+      <DependentUpon>201906132039590_backToGood.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906151829516_BackSlider.resx">
+      <DependentUpon>201906151829516_BackSlider.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

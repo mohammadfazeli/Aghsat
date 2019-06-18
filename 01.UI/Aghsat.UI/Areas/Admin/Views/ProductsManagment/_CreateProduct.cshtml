@@ -9,8 +9,13 @@
 
     Layout = null;
 }
-@Html.Partial("_SubjectForm")
 
+@*<div class="uk-modal-header ">
+
+    </div>*@
+@*<div class=" bg-secondary">*@
+@Html.Partial("_SubjectForm")
+@*</div>*@
 
 <script>
 
@@ -34,6 +39,7 @@
         <div class="uk-panel">
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(x => x.Id)
             <div class="form-group">
                 <div class="input-group  input-group-sm">
                     <div class="input-group-prepend">
@@ -48,7 +54,6 @@
                         </span>
                     </div>
                 </div>
-
             </div>
 
 
@@ -100,10 +105,6 @@
                 </div>
 
             </div>
-
-
-
-
             <div class="row form-inline">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -135,32 +136,19 @@
                 </div>
 
             </div>
+        </div>
 
-
-
+        <div class="">
+            <hr/>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="uk-button uk-button-primary" />
-                    @Ajax.ActionLink("بستن", MVC.Admin.ProductsManagment.ShowList(), new AjaxOptions
-                    {
-                        UpdateTargetId= "List", // <-- DOM element ID to update
-                        InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-                        HttpMethod = "GET" ,// <-- HTTP method
+                    @ToolsForm.BtnSubmit()
 
-                    }, new {@class = "uk-button uk-button-default uk-modal-close" })
-
-
+                    @Html.Partial("_ToolsCloseModal")
                 </div>
             </div>
-
-
-
         </div>
     }
 </div>
-
-<br />
-<br />
-<br />
 
 @Scripts.Render("~/bundles/jqueryval")

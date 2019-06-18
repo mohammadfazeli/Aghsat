@@ -1,21 +1,12 @@
 ﻿
 
+@using Aghsat.ViewModel.Pictures
 @using Microsoft.Ajax.Utilities
 @model IEnumerable<Aghsat.ViewModel.Product.Product_List_vm>
 <div class="border border-dark  uk-box-shadow-hover-large bg-light">
-
-  
     <div class=" table-responsive  bg-light p-3 ">
 
-        <div class="float-right   dt-buttons btn-group ">
-            @Ajax.ActionLink("جدید", MVC.Admin.ProductsManagment.Create(), new AjaxOptions
-       {
-           UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
-           InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-           HttpMethod = "GET", // <-- HTTP method
-           OnComplete = "ShowModal"
-       }, new {@class = "btn btn-info bg-info rounded-0 " })
-        </div>
+        @Html.Partial("_ToolsAdd")
         @{
             if (Model != null && Model.Any())
             {
@@ -31,7 +22,6 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.UnitName)
                             </th>
-
                             <th>
                                 @Html.DisplayNameFor(model => model.ProductDate)
                             </th>
@@ -50,7 +40,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.IsActive)
                             </th>
-                            <th></th>
+                            <th>@Resources.Resource.Tools</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,7 +61,6 @@
                                     @Html.DisplayFor(modelItem => item.ProductDate)
                                 </td>
                                 <td uk-lightbox="animation: slide">
-                                    @*@Html.DisplayFor(modelItem => item.MainImage)*@
 
                                     @if (!item.MainImage.IsNullOrWhiteSpace())
                                     {
@@ -98,40 +87,10 @@
                                     @Html.DisplayFor(modelItem => item.IsActive)
                                 </td>
                                 <td>
-                                    <span uk-tooltip="title: مشاهده جزیئات ; delay: 50">
-                                        @* @Html.ActionLink("Details", "Details", new { id = item.Id })*@
-                                        @Ajax.ActionLink(" ", MVC.Admin.ProductsManagment.Details(item.Id), new AjaxOptions
-                                        {
-                                            UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
-                                            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-                                            HttpMethod = "GET", // <-- HTTP method
-                                            OnComplete = "ShowModal"
-                                        }, new {@class = "uk-button   uk-button-default  uk-button-small  bg-light  fa fa-list-ul" })
-                                    </span>
-
-                                    <span uk-tooltip="title: ویرایش ; delay: 50">
-
-                                        @Ajax.ActionLink(" ", MVC.Admin.ProductsManagment.Edit(item.Id), new AjaxOptions
-                                        {
-                                            UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
-                                            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-                                            HttpMethod = "GET", // <-- HTTP method
-                                            OnComplete = "ShowModal"
-                                        }, new {@class = "uk-button uk-button-default   bg-light  uk-button-small  fa fa-edit " })
-                                    </span>
-
-                                    <span uk-tooltip="title: حذف ; delay: 50">
-                                        @Ajax.ActionLink(" ", MVC.Admin.ProductsManagment.ConfirmDelete(item.Id), new AjaxOptions
-                                        {
-                                            UpdateTargetId= "Modal_Body", // <-- DOM element ID to update
-                                            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-                                            HttpMethod = "GET" ,// <-- HTTP method
-                                            OnComplete = "ShowModal"
-
-                                        }, new {@class = "uk-button uk-button-default bg-light  uk-button-small  fa fa-trash" })
-
-
-                                    </span>
+                                    @Html.Partial("_ToolsDetail", item.Id)
+                                    @Html.Partial("_ToolsEdit", item.Id)
+                                    @Html.Partial("_ToolsConfirmDelete", item.Id)
+                                    @Html.Partial("_ToolsSetAddPicture", item.Id)
                                 </td>
                             </tr>
                         }
@@ -140,15 +99,7 @@
             }
             else
             {
-                <br />
-
-                <div uk-alert class="   bg-secondary text-white  text-right">
-                    <a class="uk-alert-close" uk-close></a>
-                    <p class="mb-2">
-                        <span class="fa fa-exclamation-circle fa-2x"></span>
-                        هیچ محصولی ثبت نشده است
-                    </p>
-                </div>
+                Html.Partial("_NotingModel");
             }
         }
 

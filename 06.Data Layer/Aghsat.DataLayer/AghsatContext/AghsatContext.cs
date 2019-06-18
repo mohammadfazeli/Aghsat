@@ -54,6 +54,7 @@ namespace Aghsat.DataLayer.AghsatContext
             modelBuilder.Configurations.Add(new VehicleConfig());
 
 
+
         }
 
         #endregion

@@ -1,0 +1,13 @@
+﻿@model  int
+
+<span uk-tooltip="title: @Resources.Resource.Edit ; delay: 50">
+
+    @Ajax.ActionLink(" ", "Edit", ViewContext.RouteData.Values["controller"].ToString(), new {id = Model}, new AjaxOptions
+    {
+        UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
+        InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+        HttpMethod = "GET", // <-- HTTP method
+        OnComplete = "ShowModal"
+    }, new {@class = "uk-button uk-button-default   bg-light  uk-button-small  fa fa-edit "})
+    
+</span>

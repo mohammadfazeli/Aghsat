@@ -31,6 +31,8 @@ namespace Aghsat.ViewModel.Product
         [Required(ErrorMessageResourceName = "ISRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         public Unit Unit { get; set; }
         public Domain.Entity.Category Category { get; set; }
+        //---------------------------------------------------------
+        [Display(Name = nameof(Resources.Resource.UnitId), ResourceType = typeof(Resources.Resource))]
 
         public int UnitId { get; set; }
         //---------------------------------------------------------
@@ -41,6 +43,6 @@ namespace Aghsat.ViewModel.Product
 
         public int CategoryId { get; set; }
         //---------------------------------------------------------
-        public virtual ICollection<ProductDetail> ProductDetails { get; set; }
+        public virtual ICollection<Aghsat.Domain.Entity.ProductDetail> ProductDetails { get; set; }
     }
 }

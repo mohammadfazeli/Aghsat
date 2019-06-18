@@ -82,6 +82,12 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult SetAddPicture()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SetAddPicture);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult Delete()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
@@ -109,6 +115,7 @@ namespace Aghsat.UI.Areas.Admin.Controllers
             public readonly string Edit = "Edit";
             public readonly string Save = "Save";
             public readonly string ConfirmDelete = "ConfirmDelete";
+            public readonly string SetAddPicture = "SetAddPicture";
             public readonly string Delete = "Delete";
         }
 
@@ -122,6 +129,7 @@ namespace Aghsat.UI.Areas.Admin.Controllers
             public const string Edit = "Edit";
             public const string Save = "Save";
             public const string ConfirmDelete = "ConfirmDelete";
+            public const string SetAddPicture = "SetAddPicture";
             public const string Delete = "Delete";
         }
 
@@ -165,7 +173,7 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         public class ActionParamsClass_Save
         {
             public readonly string ViewModel = "ViewModel";
-            public readonly string file = "file";
+            public readonly string MainImage = "MainImage";
         }
         static readonly ActionParamsClass_ConfirmDelete s_params_ConfirmDelete = new ActionParamsClass_ConfirmDelete();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -174,6 +182,16 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         public class ActionParamsClass_ConfirmDelete
         {
             public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_SetAddPicture s_params_SetAddPicture = new ActionParamsClass_SetAddPicture();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetAddPicture SetAddPictureParams { get { return s_params_SetAddPicture; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetAddPicture
+        {
+            public readonly string id = "id";
+            public readonly string model = "model";
+            public readonly string MainImage = "MainImage";
         }
         static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -196,7 +214,6 @@ namespace Aghsat.UI.Areas.Admin.Controllers
                 public readonly string _CreateProduct = "_CreateProduct";
                 public readonly string _ShowListProduct = "_ShowListProduct";
                 public readonly string Create = "Create";
-                public readonly string Delete = "Delete";
                 public readonly string Details = "Details";
                 public readonly string Edit = "Edit";
                 public readonly string Index = "Index";
@@ -204,7 +221,6 @@ namespace Aghsat.UI.Areas.Admin.Controllers
             public readonly string _CreateProduct = "~/Areas/Admin/Views/ProductsManagment/_CreateProduct.cshtml";
             public readonly string _ShowListProduct = "~/Areas/Admin/Views/ProductsManagment/_ShowListProduct.cshtml";
             public readonly string Create = "~/Areas/Admin/Views/ProductsManagment/Create.cshtml";
-            public readonly string Delete = "~/Areas/Admin/Views/ProductsManagment/Delete.cshtml";
             public readonly string Details = "~/Areas/Admin/Views/ProductsManagment/Details.cshtml";
             public readonly string Edit = "~/Areas/Admin/Views/ProductsManagment/Edit.cshtml";
             public readonly string Index = "~/Areas/Admin/Views/ProductsManagment/Index.cshtml";
@@ -276,15 +292,15 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         }
 
         [NonAction]
-        partial void SaveOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Aghsat.ViewModel.Product.Product_Add_vm ViewModel, System.Web.HttpPostedFileBase file);
+        partial void SaveOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Aghsat.ViewModel.Product.Product_Add_vm ViewModel, System.Web.HttpPostedFileBase MainImage);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Save(Aghsat.ViewModel.Product.Product_Add_vm ViewModel, System.Web.HttpPostedFileBase file)
+        public override System.Web.Mvc.ActionResult Save(Aghsat.ViewModel.Product.Product_Add_vm ViewModel, System.Web.HttpPostedFileBase MainImage)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Save);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "ViewModel", ViewModel);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "file", file);
-            SaveOverride(callInfo, ViewModel, file);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "MainImage", MainImage);
+            SaveOverride(callInfo, ViewModel, MainImage);
             return callInfo;
         }
 
@@ -297,6 +313,31 @@ namespace Aghsat.UI.Areas.Admin.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ConfirmDelete);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ConfirmDeleteOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SetAddPictureOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult SetAddPicture(int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SetAddPicture);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            SetAddPictureOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SetAddPictureOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Aghsat.ViewModel.Pictures.Picture_Add_vm model, System.Web.HttpPostedFileBase MainImage);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult SetAddPicture(Aghsat.ViewModel.Pictures.Picture_Add_vm model, System.Web.HttpPostedFileBase MainImage)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SetAddPicture);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "MainImage", MainImage);
+            SetAddPictureOverride(callInfo, model, MainImage);
             return callInfo;
         }
 

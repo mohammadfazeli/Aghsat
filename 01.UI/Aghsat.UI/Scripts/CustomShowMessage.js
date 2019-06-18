@@ -4,6 +4,9 @@
     case "Exist":
         NotificationExist(message);
         break;
+    case "Info":
+        NotificationInfo(message);
+        break;
 
     case "NotExist":
         NotificationNotExist(message);
@@ -25,7 +28,7 @@
     }
 }
 
-
+//***********************************************
 function NotificationExist(message) {
     if (message!='')
         toastr.warning(message, '');
@@ -38,7 +41,7 @@ function NotificationNotExist(message) {
     if (message!='')
         toastr.warning(message, '');
     else
-        toastr.warning('اطلاعات موجود  نمی باشد', 'توجه');
+        toastr.warning('اطلاعات موجود نمی باشد', 'توجه');
 }
 
 function NotificationInfo(message) {

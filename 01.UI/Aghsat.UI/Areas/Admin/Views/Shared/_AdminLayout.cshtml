@@ -23,7 +23,7 @@
 </head>
 <body style="direction: rtl;   background-color: #CDDBD7;  ">
 
-    <nav class="p-1 navbar navbar-expand-sm bg-dark text-right  fixed-top" style="border-bottom: 1px  solid red;">
+    <nav class="p-1 navbar navbar-expand-sm bg-dark text-right" style="border-bottom: 1px  solid red;">
         <button class="uk-button uk-button-default bg-danger " type="button" uk-toggle="target: #offcanvas-push"><span uk-icon="menu"></span></button>
 
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
@@ -37,9 +37,19 @@
 
     </nav>
     <!-- offcanvas -->
-    <div id="offcanvas-push" uk-offcanvas="mode: push; overlay: true" class="p-3 Menu">
-        <div class="uk-offcanvas-bar uk-padding-remove  ">
+    <div id="offcanvas-push" uk-offcanvas=" overlay: true" class="">
+        <div class="uk-offcanvas-bar uk-padding-remove bg-dark ">
             <!-- Nav -->
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <br />
+            <br />
+            <br />
+            <div class="uk-margin">
+                <div class="uk-inline w-100 mb-2">
+                    <a class="uk-form-icon" href="#" uk-icon="icon: search"></a>
+                    <input class="uk-input " type="text" placeholder="جستجو کنید">
+                </div>
+            </div>
             @Html.Action(MVC.Admin.PanelManagment.Menu())
         </div>
     </div>
@@ -56,7 +66,7 @@
 
     </div>
 
-   @Html.Partial("_ModalMain")
+    @Html.Partial("_ModalMain")
 
     @{
         if (ViewBag.Message != null)
@@ -86,7 +96,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
 
-    @*@ToastrHelper.ProcessToastrs()*@
+    @ToastrHelper.ProcessToastrs()
 
     @*@Scripts.Render("~/Scripts/Custom-datatables.min.js")*@
 

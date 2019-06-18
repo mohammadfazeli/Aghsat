@@ -59,6 +59,11 @@
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="Category\Category_Add_vm.cs" />
     <Compile Include="Category\Category_List_vm.cs" />
+    <Compile Include="Pictures\Picture_Add_vm.cs" />
+    <Compile Include="Pictures\Picture_List_vm.cs" />
+    <Compile Include="ProductDetail\ProductDetail_Add_vm.cs" />
+    <Compile Include="ProductDetail\ProductDetail_Detail_vm.cs" />
+    <Compile Include="ProductDetail\ProductDetail_List_vm.cs" />
     <Compile Include="Product\Product_Add_vm.cs" />
     <Compile Include="Product\Product_Detail_vm.cs" />
     <Compile Include="Product\Product_List_vm.cs" />

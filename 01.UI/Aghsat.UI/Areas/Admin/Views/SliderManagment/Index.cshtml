@@ -1,0 +1,22 @@
+﻿
+
+@{
+    /**/
+
+    //Layout = ViewBag.lodaFromMain != null && ViewBag.lodaFromMain != true ?
+    //    "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml" : null;
+
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="">
+    @Html.Partial("_SubjectForm")
+
+    <div id="List">
+        @Html.Action("ShowList")
+    </div>
+
+</div>
+
+
+@*@Html.Partial("_Modal")*@

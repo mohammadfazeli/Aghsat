@@ -107,6 +107,8 @@
     <Compile Include="Interface\IApplicationUserManagerService.cs" />
     <Compile Include="Interface\ICategoryServices.cs" />
     <Compile Include="Interface\IPanelManagmentService.cs" />
+    <Compile Include="Interface\IPictureService.cs" />
+    <Compile Include="Interface\ISliderServices.cs" />
     <Compile Include="Interface\IProductServices.cs" />
     <Compile Include="Interface\IRoleStore.cs" />
     <Compile Include="Interface\IUnitService.cs" />
@@ -119,6 +121,8 @@
     <Compile Include="Services\CategoryServices.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\PanelManagmentService.cs" />
+    <Compile Include="Services\PictureService.cs" />
+    <Compile Include="Services\SliderServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
     <Compile Include="Services\RoleStore.cs" />
     <Compile Include="Services\SmsService.cs" />

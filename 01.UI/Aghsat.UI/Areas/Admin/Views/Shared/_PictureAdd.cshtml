@@ -1,0 +1,130 @@
+﻿@model Aghsat.ViewModel.Pictures.Picture_Add_vm
+
+@*@using (Html.BeginForm())
+    {*@
+<p>@ViewContext.RouteData.Values["controller"].ToString()</p>
+@Html.Partial("_SubjectForm")
+
+@*@using (Ajax.BeginForm(MVC.Admin.ProductsManagment.SetAddPicture(), new AjaxOptions*@
+@using (Ajax.BeginForm("SetAddPicture", ViewContext.RouteData.Values["controller"], new AjaxOptions
+
+{
+    HttpMethod = "Post",
+    OnSuccess = "OnSuccess",
+    //UpdateTargetId = "List",
+
+}, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="row">
+
+
+        <div class="col-md-6 ">
+            <div class="form-group">
+                @*  <input type="file" name="file" id="file" />*@
+                @Html.TextBoxFor(x => Model.PictureName, new { type = "file", id = "imgInp" })
+                @Html.ValidationMessageFor(m => m.PictureName, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <div class="input-group  input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            @Html.DisplayNameFor(x => x.ShortDescription)
+                        </span>
+                    </div>
+                    @Html.TextBoxFor(x => x.ShortDescription, new { @class = "form-control uk-input" })
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            @Html.ValidationMessageFor(x => x.ShortDescription, "", new { @class = "text-danger" })
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="input-group  input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            @Html.DisplayNameFor(x => x.DisplayPriority)
+                        </span>
+                    </div>
+                    @Html.TextBoxFor(x => x.DisplayPriority, new { @class = "form-control uk-input" })
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            @Html.ValidationMessageFor(x => x.DisplayPriority, "", new { @class = "text-danger" })
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+        <div class="col-md-6">
+            <img id="blah" class="img-thumbnail img-fluid " src="#" alt="your image" />
+
+        </div>
+    </div>
+    @Html.HiddenFor(x => x.ProductDetailId)
+    @Html.HiddenFor(x => x.SliderId)
+
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.ProductDetailId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductDetailId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductDetailId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SliderId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SliderId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SliderId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @*<input type="submit" value="@Resources.Resource.Save" class="uk-button uk-button-primary" />
+                @Ajax.ActionLink(@Resources.Resource.Close, "ShowList", ViewContext.RouteData.Values["controller"], new AjaxOptions
+                {
+                    UpdateTargetId= "List", // <-- DOM element ID to update
+                    InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                    HttpMethod = "GET" ,// <-- HTTP method
+
+                }, new {@class = "uk-button uk-button-default uk-modal-close" })*@
+
+            @ToolsForm.BtnSubmit()
+
+            @Html.Partial("_ToolsCloseModal")
+
+        </div>
+    </div>
+
+
+}
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#imgInp").change(function(){
+        readURL(this);
+    });
+</script>
+@Scripts.Render("~/bundles/jqueryval")
+

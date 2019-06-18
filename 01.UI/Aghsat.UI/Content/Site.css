@@ -27,9 +27,9 @@ textarea {
     margin-top: auto;
 }
 
-.uk-offcanvas-bar .uk-card-default {
+/*.uk-offcanvas-bar .uk-card-default {
     background-color: #dee2e6 !important;
-}
+}*/
 
 .Menu_ItemName {
     border: 1px solid #ff0000;
@@ -64,4 +64,12 @@ textarea {
 }
 .dataTables_filter {
     text-align: center !important;
+}
+table th {
+    font-size: 0.9rem !important;
+    font-weight: 400 !important;
+}
+table td {
+    font-size: 0.9rem !important;
+    font-weight: 300 !important;
 }

@@ -12,6 +12,7 @@ using Aghsat.ServiceLayer;
 using System.Web;
 using System.IO;
 using System.Linq;
+using Aghsat.ViewModel.Pictures;
 using DNTBreadCrumb;
 using Microsoft.Owin.Security.Provider;
 
@@ -28,15 +29,19 @@ namespace Aghsat.UI.Areas.Admin.Controllers
 
         private readonly IUnitOfWork _uow;
         private readonly IProductServices _ProductsServices;
+        private readonly IPictureService _pictureService;
+
 
         #endregion
 
         #region Consructor       
 
-        public ProductsManagmentController(IUnitOfWork uow, IProductServices ProductsServices)
+        public ProductsManagmentController(IUnitOfWork uow, IProductServices ProductsServices, IPictureService pictureService)
         {
             _uow = uow;
             _ProductsServices = ProductsServices;
+            _pictureService = pictureService;
+
         }
 
         #endregion
@@ -58,7 +63,6 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         [HttpGet]
         public virtual ActionResult ShowList()
         {
-            ToastrService.AddToUserQueue(new Toastr(message: "ثبت شد", type: ToastrType.Success));
 
             return PartialView("_ShowListProduct", _ProductsServices.GetListVms());
         }
@@ -116,7 +120,6 @@ namespace Aghsat.UI.Areas.Admin.Controllers
         }
 
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Icone("fa fa-save")]
@@ -127,44 +130,89 @@ namespace Aghsat.UI.Areas.Admin.Controllers
             if (!ModelState.IsValid && !Request.IsAjaxRequest() || MainImage == null)
             {
                 ToastrService.SetMessage(ToastrType.Info, "اشکال در ثبت");
-                return PartialView("_ShowListProducts", _ProductsServices.GetAddVm(ViewModel));
+                //return PartialView("_ShowListProducts", _ProductsServices.GetAddVm(ViewModel));
+                return Json(new { type = "Fail", Msg = "کاربر گرامی عکسی انتخاب نشده است" });
 
             }
 
-            //try
-            //{
             var fileName = Path.GetFileName(MainImage.FileName);
             ViewModel.MainImage = fileName;
+            var ServerMapPath = Server.MapPath("~/Content/Image/ProductsImage");
 
             var Products = Mapper.Map<Product_Add_vm, Product>(ViewModel);
-            var path = Path.Combine(Server.MapPath("~/Content/Image/ProductsImage"), fileName);
+            var path = Path.Combine(ServerMapPath, fileName);
 
-            var result = _ProductsServices.Create(Products);
-
-            switch (result)
+            if (ViewModel.Id == 0)
             {
-                case AddStatus.Succeeded:
 
-                    _uow.SaveAllChanges();
-                    MainImage.SaveAs(path);
-                    return RedirectToAction(MVC.Admin.ProductsManagment.ShowList());
+                #region Insert
+                var result = _ProductsServices.Create(Products);
 
-                case AddStatus.Exist:
+                switch (result)
+                {
+                    case AddStatus.Succeeded:
 
-                    Messagetype = AddStatus.Exist.ToString();
-                    Message = "";
-                    break;
-                case AddStatus.Error:
+                        _uow.SaveAllChanges();
+                        MainImage.SaveAs(path);
+                        return RedirectToAction(MVC.Admin.ProductsManagment.ShowList());
 
-                    Messagetype = AddStatus.Error.ToString();
-                    Message = "";
-                    break;
-                case AddStatus.Fail:
+                    case AddStatus.Exist:
 
-                    Messagetype = AddStatus.Fail.ToString();
-                    Message = "";
-                    break;
+                        Messagetype = AddStatus.Exist.ToString();
+                        Message = "";
+                        break;
+                    case AddStatus.Error:
 
+                        Messagetype = AddStatus.Error.ToString();
+                        Message = "";
+                        break;
+                    case AddStatus.Fail:
+
+                        Messagetype = AddStatus.Fail.ToString();
+                        Message = "";
+                        break;
+
+                }
+
+
+                #endregion
+            }
+            else
+            {
+                #region updata
+                var OldMainImage = _ProductsServices.GetByID(Products.Id).MainImage;
+                var Oldpath = Path.Combine(ServerMapPath, OldMainImage);
+
+                var result = _ProductsServices.Update(Products);
+
+                switch (result)
+                {
+                    case updateStatus.Succeeded:
+
+                        _uow.SaveAllChanges();
+                        DeleteImage(Oldpath);
+                        MainImage.SaveAs(path);
+                        return RedirectToAction(MVC.Admin.ProductsManagment.ShowList());
+
+                    case updateStatus.Exist:
+
+                        Messagetype = updateStatus.Exist.ToString();
+                        Message = "";
+                        break;
+                    case updateStatus.Error:
+
+                        Messagetype = updateStatus.Error.ToString();
+                        Message = "";
+                        break;
+                    case updateStatus.Fail:
+
+                        Messagetype = updateStatus.Fail.ToString();
+                        Message = "";
+                        break;
+
+                }
+
+                #endregion
             }
             return Json(new { type = Messagetype, Msg = Message });
 
@@ -179,11 +227,41 @@ namespace Aghsat.UI.Areas.Admin.Controllers
 
             if (id > 0)
             {
-                return PartialView("Delete", id);
+                return PartialView("_DeleteModal", id);
             }
 
             return RedirectToAction(MVC.Admin.ProductsManagment.Index());
         }
+
+        [Icone("fa fa-image")]
+        [Title("افزودن عکس")]
+        [HttpGet]
+        public virtual ActionResult SetAddPicture(int id)
+        {
+            var x = new Picture_Add_vm()
+            {
+                ProductDetailId = id
+            };
+            return View("_PictureAdd", x);
+        }
+        [HttpPost]
+        public virtual ActionResult SetAddPicture(Picture_Add_vm model, HttpPostedFileBase MainImage)
+        {
+
+            try
+            {
+                var modelPicture = Mapper.Map<Picture_Add_vm, Picture>(model);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { type = AddStatus.Error.ToString(), Msg = Message });
+
+            }
+            return Json(new { type = AddStatus.Succeeded.ToString(), Msg = Message });
+        }
+
+
 
         [HttpPost]
         public virtual ActionResult Delete(int id)
@@ -198,12 +276,13 @@ namespace Aghsat.UI.Areas.Admin.Controllers
                 case DeleteStatus.Succeeded:
                     try
                     {
-                        var file = new FileInfo(path);
-                        if (file.Exists)
-                        {
+                        DeleteImage(path);
+                        //var resultDelete = _pictureService.delete(id);
+                        //if (resultDelete == DeleteStatus.Succeeded)
+                        //{
+                        //    _pictureService.PhysicalDeleteImage(path);
+                        //}
 
-                            file.Delete();
-                        }
                     }
                     finally
                     {
@@ -233,6 +312,13 @@ namespace Aghsat.UI.Areas.Admin.Controllers
 
         }
 
-
+        private void DeleteImage(string path)
+        {
+            var file = new FileInfo(path);
+            if (file.Exists)
+            {
+                file.Delete();
+            }
+        }
     }
 }

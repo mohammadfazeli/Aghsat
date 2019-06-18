@@ -1,0 +1,29 @@
+﻿@model  int
+
+@Html.Partial("_SubjectForm")
+
+<div class="border border-dark  bg-light p-3">
+    <h3>@Resources.Resource.DeleteText</h3>
+
+    @using (Ajax.BeginForm("Delete",
+        ViewContext.RouteData.Values["controller"].ToString(),
+        new { id = Model },
+        new AjaxOptions
+        {
+            HttpMethod = "Post",
+            UpdateTargetId = "List",
+            OnSuccess = "OnSuccess"
+        }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions  ">    
+            @ToolsForm.BtnSubmit()
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+
+            @* <input type="submit" value="@Resources.Resource.Delete" class="uk-button uk-button-default uk-modal-close fa fa-remove" /> |*@
+        </div>
+
+
+    }
+</div>

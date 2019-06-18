@@ -1,0 +1,9 @@
+﻿<div class="float-right   dt-buttons btn-group ">
+    @Ajax.ActionLink("جدید", "Create",ViewContext.RouteData.Values["controller"], new AjaxOptions
+    {
+        UpdateTargetId = "Modal_Body", // <-- DOM element ID to update
+        InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+        HttpMethod = "GET", // <-- HTTP method
+        OnComplete = "ShowModal"
+    }, new {@class = "btn btn-info bg-info rounded-0 " })
+</div>

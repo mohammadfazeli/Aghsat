@@ -46,6 +46,7 @@ namespace T4MVC
         public Aghsat.UI.Areas.Admin.Controllers.CategoryManagmentController CategoryManagment = new Aghsat.UI.Areas.Admin.Controllers.T4MVC_CategoryManagmentController();
         public Aghsat.UI.Areas.Admin.Controllers.PanelManagmentController PanelManagment = new Aghsat.UI.Areas.Admin.Controllers.T4MVC_PanelManagmentController();
         public Aghsat.UI.Areas.Admin.Controllers.ProductsManagmentController ProductsManagment = new Aghsat.UI.Areas.Admin.Controllers.T4MVC_ProductsManagmentController();
+        public Aghsat.UI.Areas.Admin.Controllers.SliderManagmentController SliderManagment = new Aghsat.UI.Areas.Admin.Controllers.T4MVC_SliderManagmentController();
         public Aghsat.UI.Areas.Admin.Controllers.UnitsController Units = new Aghsat.UI.Areas.Admin.Controllers.T4MVC_UnitsController();
         public Aghsat.UI.Areas.Admin.Controllers.VehicleManagmentController VehicleManagment = new Aghsat.UI.Areas.Admin.Controllers.T4MVC_VehicleManagmentController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
@@ -114,6 +115,7 @@ namespace Links
         public static readonly string bootstrap_min_js_map = Url("bootstrap.min.js.map");
         public static readonly string Custom_datatables_min_js = Url("Custom-datatables.min.js");
         public static readonly string CustomScript_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CustomScript.min.js") ? Url("CustomScript.min.js") : Url("CustomScript.js");
+        public static readonly string CustomShowMessage_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CustomShowMessage.min.js") ? Url("CustomShowMessage.min.js") : Url("CustomShowMessage.js");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class esm {
             public const string UrlPath = "~/Scripts/esm";
@@ -523,6 +525,7 @@ namespace Links
                 public static readonly string bootstrap_min_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/bootstrap.min.js"); 
                 public static readonly string Custom_datatables_min_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/Custom-datatables.min.js"); 
                 public static readonly string CustomScript_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/CustomScript.js"); 
+                public static readonly string CustomShowMessage_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/CustomShowMessage.js"); 
                 public static readonly string Fulldatatables_min_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/Fulldatatables.min.js"); 
                 public static readonly string jalaali_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/jalaali.js"); 
                 public static readonly string jquery_3_3_1_intellisense_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/jquery-3.3.1.intellisense.js"); 
